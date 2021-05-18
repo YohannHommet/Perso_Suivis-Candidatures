@@ -4,7 +4,14 @@
 
 {% block body %}
 
-    <div class="applications p-3" style="margin-top: 6rem">
+    <div class="text-center" style="margin-top: 5rem; margin-bottom: 3rem;">
+        <h1>Liste des Candidatures</h1>
+        <button type="button" class="btn btn-info px-4" data-bs-toggle="modal" data-bs-target="#applicationModal">
+            <i class="fas fa-plus"></i>
+        </button>
+    </div>
+
+    <div class="applications p-4">
 
         <table class="table table-hover">
             <thead>
@@ -31,7 +38,7 @@
                     <td>{{ application.dateCandidature | date('d/m/Y') }}</td>
                     <td>{{ application.emailContact }}</td>
                     <td>{{ application.technos }}</td>
-                    <td>{{ application.remarques }}</td>
+                    <td>{{ application.remarques | u.truncate(10, '...', false) }}</td>
                 </tr>
             {% endfor %}
             </tbody>
@@ -39,50 +46,76 @@
 
     </div>
 
-    <div class="container my-5 p-3 shadow-sm rounded">
-        {{ form_start(form) }}
-        <div class="row">
-            <div class="col">
-                {{ form_row(form.nom_entreprise) }}
-            </div>
-            <div class="col">
-                {{ form_row(form.localisation_entreprise) }}
-            </div>
-            <div class="col">
-                {{ form_row(form.poste_recherche) }}
+
+
+    <!-- Button trigger modal -->
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="applicationModal" tabindex="-1" aria-labelledby="applicationModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="applicationModalLabel">Ajouter une candidature</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        {{ form_start(form) }}
+                        <div class="row">
+                            <div class="col">
+                                {{ form_row(form.nom_entreprise) }}
+                            </div>
+                            <div class="col">
+                                {{ form_row(form.localisation_entreprise) }}
+                            </div>
+                            <div class="col">
+                                {{ form_row(form.poste_recherche) }}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                {{ form_row(form.lien_candidature) }}
+                            </div>
+                            <div class="col">
+                                {{ form_row(form.nature_candidature) }}
+                            </div>
+                            <div class="col">
+                                {{ form_row(form.date_candidature) }}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                {{ form_row(form.email_contact) }}
+                            </div>
+                            <div class="col">
+                                {{ form_row(form.technos) }}
+                            </div>
+                            <div class="col">
+                                {{ form_row(form.remarques) }}
+                            </div>
+                        </div>
+
+                        <div class="mt-3 d-flex justify-content-end">
+                            <button class="btn btn-info px-5" type="submit">Go</button>
+                        </div>
+
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+
             </div>
         </div>
-
-        <div class="row">
-            <div class="col">
-                {{ form_row(form.lien_candidature) }}
-            </div>
-            <div class="col">
-                {{ form_row(form.nature_candidature) }}
-            </div>
-            <div class="col">
-                {{ form_row(form.date_candidature) }}
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col">
-                {{ form_row(form.email_contact) }}
-            </div>
-            <div class="col">
-                {{ form_row(form.technos) }}
-            </div>
-            <div class="col">
-                {{ form_row(form.remarques) }}
-            </div>
-        </div>
-
-        <div class="mt-3">
-            <button class="btn btn-info px-5" type="submit">Go</button>
-        </div>
-
-        {{ form_end(form) }}
     </div>
+
+
+
+
+
 
 {% endblock %}
 
