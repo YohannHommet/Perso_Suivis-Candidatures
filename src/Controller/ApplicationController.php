@@ -11,6 +11,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
+/**
+ * Class ApplicationController
+ * @package App\Controller
+ */
 class ApplicationController extends AbstractController
 {
     /**
@@ -42,4 +47,18 @@ class ApplicationController extends AbstractController
             'applications' => $repository->findAll()
         ]);
     }
+
+    /**
+     * @Route("/applications/{id}", name="app_application_show", methods={"GET"})
+     */
+    public function show(Applications $applications): Response
+    {
+        return $this->render('application/show.html.twig', [
+            'application' => $applications
+        ]);
+    }
+
+
+
+
 }

@@ -30,7 +30,7 @@
             <tbody class="table-stripped">
             {% for application in applications %}
                 <tr>
-                    <td>{{ application.nomEntreprise }}</td>
+                    <td><a href="{{ path('app_application_show', {'id': application.id}) }}">{{ application.nomEntreprise }}</a></td>
                     <td>{{ application.localisationEntreprise }}</td>
                     <td>{{ application.posteRecherche }}</td>
                     <td><a href="{{ application.lienCandidature }}">{{ application.lienCandidature | u.truncate(15, '...')  }}</a></td>
@@ -38,18 +38,13 @@
                     <td>{{ application.dateCandidature | date('d/m/Y') }}</td>
                     <td>{{ application.emailContact }}</td>
                     <td>{{ application.technos }}</td>
-                    <td>{{ application.remarques | u.truncate(10, '...', false) }}</td>
+                    <td>{{ application.remarques | u.truncate(12, '..', false) }}</td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
 
     </div>
-
-
-
-    <!-- Button trigger modal -->
-
 
     <!-- Modal -->
     <div class="modal fade" id="applicationModal" tabindex="-1" aria-labelledby="applicationModalLabel" aria-hidden="true">
@@ -111,10 +106,6 @@
             </div>
         </div>
     </div>
-
-
-
-
 
 
 {% endblock %}
