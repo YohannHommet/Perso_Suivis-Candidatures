@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ApplicationsRepository;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -30,7 +31,7 @@ class Applications
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $poste_recherche;
+    private ?string $poste_recherche;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -122,7 +123,8 @@ class Applications
 
     public function setDateCandidature(\DateTimeInterface $date_candidature): self
     {
-        $this->date_candidature = new \DateTime();
+        $now = date('d/m/Y');
+        $this->date_candidature = new DateTime($now);
 
         return $this;
     }
