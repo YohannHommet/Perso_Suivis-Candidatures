@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Applications;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -28,12 +29,13 @@ class ApplicationsFormType extends AbstractType
                 'label' => 'Nature Candidature'
             ])
             ->add('date_candidature', DateTimeType::class, [
-                'label' => 'Date Candidature'
+                'label' => 'Date Candidature',
+                'widget' => 'single_text',
             ])
             ->add('lien_candidature', UrlType::class, [
                 'label' => "Lien de l'annonce"
             ])
-            ->add('email_contact', TextType::class, [
+            ->add('email_contact', EmailType::class, [
                 'label' => 'email du contact'
             ])
             ->add('technos', TextType::class, [

@@ -124,7 +124,7 @@ class Applications
     public function setDateCandidature(\DateTimeInterface $date_candidature): self
     {
         $now = date('d/m/Y');
-        $this->date_candidature = new DateTime($now);
+        $this->date_candidature = new DateTime();
 
         return $this;
     }

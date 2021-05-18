@@ -2,7 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Applications;
+use App\Form\ApplicationsFormType;
+use App\Repository\ApplicationsRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -10,9 +15,31 @@ class ApplicationController extends AbstractController
 {
     /**
      * @Route("/applications", name="app_application", methods={"GET|POST"})
+     *
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @param ApplicationsRepository $repository
+     *
+     * @return Response
      */
-    public function index(): Response
+    public function index(Request $request, EntityManagerInterface $em, ApplicationsRepository $repository): Response
     {
-        return $this->render('application/index.html.twig', []);
+        $application = new Applications();
+
+        $form = $this->createForm(ApplicationsFormType::class, $application);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($application);
+            $em->flush();
+            
+            $this->redirect($this->redirectToRoute("app_application"));
+        }
+
+
+        return $this->render('application/index.html.twig', [
+            'form' => $form->createView(),
+            'applications' => $repository->findAll()
+        ]);
     }
 }
