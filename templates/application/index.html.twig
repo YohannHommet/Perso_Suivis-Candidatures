@@ -13,8 +13,8 @@
 
     <div class="applications p-4">
 
-        <table class="table table-hover">
-            <thead>
+        <table class="table table-hover table-stripped table-responsive">
+            <thead class="table-dark">
             <tr>
                 <th scope="col">Nom Entreprise</th>
                 <th scope="col">Localisation</th>
@@ -27,13 +27,13 @@
                 <th scope="col">Remarques</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody class="table-stripped">
             {% for application in applications %}
                 <tr>
                     <td>{{ application.nomEntreprise }}</td>
                     <td>{{ application.localisationEntreprise }}</td>
                     <td>{{ application.posteRecherche }}</td>
-                    <td>{{ application.lienCandidature }}</td>
+                    <td><a href="{{ application.lienCandidature }}">{{ application.lienCandidature | u.truncate(15, '...')  }}</a></td>
                     <td>{{ application.natureCandidature }}</td>
                     <td>{{ application.dateCandidature | date('d/m/Y') }}</td>
                     <td>{{ application.emailContact }}</td>
@@ -53,7 +53,7 @@
 
     <!-- Modal -->
     <div class="modal fade" id="applicationModal" tabindex="-1" aria-labelledby="applicationModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
             <div class="modal-content">
 
                 <div class="modal-header">

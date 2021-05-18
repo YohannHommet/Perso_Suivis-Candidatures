@@ -32,8 +32,8 @@ class ApplicationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $em->persist($application);
             $em->flush();
-            
-            $this->redirect($this->redirectToRoute("app_application"));
+
+            return $this->redirect($request->getUri());
         }
 
 
