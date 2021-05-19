@@ -31,7 +31,7 @@
             {% for application in applications %}
                 <tr>
                     <td><a href="{{ path('app_application_show', {'id': application.id}) }}">{{ application.nomEntreprise }}</a></td>
-                    <td>{{ application.localisationEntreprise }}</td>
+                    <td>{{ application.localisationEntreprise | upper }}</td>
                     <td>{{ application.posteRecherche }}</td>
                     <td><a href="{{ application.lienCandidature }}">{{ application.lienCandidature | u.truncate(15, '...')  }}</a></td>
                     <td>{{ application.natureCandidature }}</td>
