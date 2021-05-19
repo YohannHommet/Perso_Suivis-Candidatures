@@ -36,13 +36,15 @@ class ApplicationsFormType extends AbstractType
                 'label' => "Lien de l'annonce"
             ])
             ->add('email_contact', EmailType::class, [
-                'label' => 'email du contact'
+                'label' => 'email du contact',
+                'required' => false
             ])
             ->add('technos', TextType::class, [
                 'label' => 'technos'
             ])
             ->add('remarques', TextType::class, [
-                'label' => 'remarques'
+                'label' => 'remarques',
+                'required' => false
             ])
         ;
     }

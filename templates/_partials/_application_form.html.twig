@@ -1,0 +1,44 @@
+<div class="container-fluid">
+    {{ form_start(form) }}
+    <div class="row">
+        <div class="col">
+            {{ form_row(form.nom_entreprise) }}
+        </div>
+        <div class="col">
+            {{ form_row(form.localisation_entreprise) }}
+        </div>
+        <div class="col">
+            {{ form_row(form.poste_recherche) }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            {{ form_row(form.lien_candidature) }}
+        </div>
+        <div class="col">
+            {{ form_row(form.nature_candidature) }}
+        </div>
+        <div class="col">
+            {{ form_row(form.date_candidature) }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            {{ form_row(form.email_contact) }}
+        </div>
+        <div class="col">
+            {{ form_row(form.technos) }}
+        </div>
+        <div class="col">
+            {{ form_row(form.remarques) }}
+        </div>
+    </div>
+
+    <div class="mt-3 d-flex justify-content-end">
+        <button class="btn btn-info px-5" type="submit">Go</button>
+    </div>
+
+    {{ form_end(form) }}
+</div>

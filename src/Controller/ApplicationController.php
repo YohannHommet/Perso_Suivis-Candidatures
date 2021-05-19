@@ -38,7 +38,7 @@ class ApplicationController extends AbstractController
             $em->persist($application);
             $em->flush();
 
-            return $this->redirect($request->getUri());
+            return $this->redirectToRoute("app_application");
         }
 
 
@@ -49,12 +49,23 @@ class ApplicationController extends AbstractController
     }
 
     /**
-     * @Route("/applications/{id}", name="app_application_show", methods={"GET"})
+     * @Route("/application/{id}", name="app_application_show", methods={"GET|POST"})
      */
-    public function show(Applications $applications): Response
+    public function show(Applications $applications, Request $request, EntityManagerInterface $em): Response
     {
+        $form = $this->createForm(ApplicationsFormType::class, $applications);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($applications);
+            $em->flush();
+
+            return $this->redirectToRoute("app_application_show", ['id' => $applications->getId()]);
+        }
+
         return $this->render('application/show.html.twig', [
-            'application' => $applications
+            'application' => $applications,
+            'form' => $form->createView()
         ]);
     }
 
