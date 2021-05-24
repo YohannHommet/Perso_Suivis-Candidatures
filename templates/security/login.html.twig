@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        {% if error %}
+            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+
+        {% if app.user %}
+            <div class="mb-3">
+                You are logged in as {{ app.user.username }}, <a
+                        href="{{ path('app_logout') }}">Logout</a>
+            </div>
+        {% endif %}
+    </div>
+
+
+    <div class="row login">
+        <div class="col">
+
+            <div class="card p-4 login_box border-0">
+                <img class="login_box__img"
+                     src="https://lh3.googleusercontent.com/a-/AOh14Gj99VObFyE8W_h8RrcwZO_aYiIHu5AAa_XpnOym=s600-k-no-rp-mo"
+                     alt="profile">
+
+                <form method="post">
+
+                    <h1 class="h3 my-5 text-center font-weight-normal">Please sign in</h1>
+
+                    <div class="mb-4 field">
+                        <input type="email" value="{{ last_username }}" name="email" id="inputEmail"
+                               class="form-control" autocomplete="email" required autofocus>
+                        <label for="inputEmail" class="form-label ms-auto">Email</label>
+                    </div>
+
+                    <div class="field mb-2">
+                        <input type="password" name="password" id="inputPassword" class="form-control"
+                               autocomplete="current-password" required>
+                        <label for="inputPassword" class="form-label">Password</label>
+                    </div>
+
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                    <div class="checkbox ms-2">
+                        <label>
+                            <input type="checkbox" name="_remember_me"> Remember me
+                        </label>
+                    </div>
+
+                    <div class="d-grid mt-4">
+                        <button class="btn btn-primary px-4" type="submit">Sign in</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

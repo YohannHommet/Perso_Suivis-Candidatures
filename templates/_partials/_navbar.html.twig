@@ -1,8 +1,8 @@
 
-<nav class="navbar fixed-top navbar-expand-fluid navbar-dark bg-dark">
+<nav class="navbar fixed-top navbar-expand-fluid navbar-dark bg-dark shadow transparent" id="nav">
 
     <div class="container-fluid px-3">
-        <a class="navbar-brand" href="{{ path('app_home') }}">Accueil</a>
+        <a class="navbar-brand" href="{{ path('app_home') }}">CheckMyApplications</a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">Menu
             <span class="navbar-toggler-icon"></span>
@@ -13,12 +13,16 @@
                 <li class="nav-item text-center">
                     <a class="nav-link fs-5" href="{{ path('app_application') }}">Applications</a>
                 </li>
-                <li class="nav-item text-center">
-                    <a class="nav-link fs-5" href="#">test</a>
-                </li>
-                <li class="nav-item text-center">
-                    <a class="nav-link fs-5" href="#">test</a>
-                </li>
+                {% if not app.user %}
+                    <li class="nav-item text-center d-inline-flex justify-content-center">
+                        <a class="nav-link fs-5" href="{{ path('app_register') }}">Register</a><span class="fw-bold fs-4 text-secondary px-2 pt-1">-</span><a class="nav-link fs-5" href="{{ path('app_login') }}">Login</a>
+                    </li>
+                {% endif %}
+                {% if app.user %}
+                    <li class="nav-item text-center">
+                        <a class="nav-link fs-5 text-danger" href="{{ path('app_logout') }}">Logout</a>
+                    </li>
+                {% endif %}
             </ul>
         </div>
     </div>

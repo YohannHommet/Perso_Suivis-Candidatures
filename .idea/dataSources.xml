@@ -13,5 +13,15 @@
         </library>
       </libraries>
     </data-source>
+    <data-source source="LOCAL" name="candidatures@localhost" uuid="482ae867-6411-40a3-af02-d04663c7231b">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/candidatures</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+      <driver-properties>
+        <property name="serverTimezone" value="Europe/Paris" />
+      </driver-properties>
+    </data-source>
   </component>
 </project>
