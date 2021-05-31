@@ -6,7 +6,8 @@
 
     <div class="text-center" style="margin-top: 5rem; margin-bottom: 3rem;">
         <h1>{{ application.nomEntreprise }}</h1>
-        <button type="button" class="btn custom_button_glass px-4" data-bs-toggle="modal" data-bs-target="#applicationModal">
+        <button type="button" class="btn custom_button_glass px-4" data-bs-toggle="modal"
+                data-bs-target="#applicationModal">
             <i class="fas fa-plus"></i>
         </button>
     </div>
@@ -19,21 +20,54 @@
                 <a class="text-dark text-decoration-none" href="{{ path('app_application') }}"><< Back</a>
             </div>
             <ul class="list-group list-group-flush list_glass">
-                <li class="list-group-item py-3 list_glass-items"><strong>Nom Entreprise : </strong>{{ application.nomEntreprise }}</li>
-                <li class="list-group-item py-3 list_glass-items"><strong>Localisation : </strong>{{ application.localisationEntreprise }}</li>
-                <li class="list-group-item py-3 list_glass-items"><strong>Poste Recherché : </strong>{{ application.posteRecherche }}</li>
-                <li class="list-group-item py-3 list_glass-items"><strong>Lien de l'annonce : </strong>{{ application.lienCandidature }}</li>
-                <li class="list-group-item py-3 list_glass-items"><strong>Nature Candidature : </strong>{{ application.natureCandidature }}</li>
-                <li class="list-group-item py-3 list_glass-items"><strong>Date Candidature : </strong>{{ application.dateCandidature | date('d/m/Y') }}</li>
-                <li class="list-group-item py-3 list_glass-items"><strong>Email de Contact : </strong>{{ application.emailContact }}</li>
-                <li class="list-group-item py-3 list_glass-items"><strong>Technos : </strong>{{ application.technos }}</li>
-                <li class="list-group-item py-3 list_glass-items"><strong>Remarques : </strong>{{ application.remarques }}</li>
+                <li class="list-group-item py-3 list_glass-items"><strong>Nom Entreprise
+                        : </strong>{{ application.nomEntreprise }}</li>
+                <li class="list-group-item py-3 list_glass-items"><strong>Localisation
+                        : </strong>{{ application.localisationEntreprise }}</li>
+                <li class="list-group-item py-3 list_glass-items"><strong>Poste Recherché
+                        : </strong>{{ application.posteRecherche }}</li>
+                <li class="list-group-item py-3 list_glass-items"><strong>Lien de l'annonce
+                        : </strong>{{ application.lienCandidature }}</li>
+                <li class="list-group-item py-3 list_glass-items"><strong>Nature Candidature
+                        : </strong>{{ application.natureCandidature }}</li>
+                <li class="list-group-item py-3 list_glass-items"><strong>Date Candidature
+                        : </strong>{{ application.dateCandidature | date('d/m/Y') }}</li>
+                <li class="list-group-item py-3 list_glass-items"><strong>Email de Contact
+                        : </strong>{{ application.emailContact }}</li>
+                <li class="list-group-item py-3 list_glass-items"><strong>Technos : </strong>{{ application.technos }}
+                </li>
+                <li class="list-group-item py-3 list_glass-items"><strong>Remarques
+                        : </strong>{{ application.remarques }}</li>
             </ul>
 
             <div class="text-center mt-5">
-                <a class="btn custom_button_glass red" href="{{ path('app_application_delete', {'id': application.id}) }}">Delete</a>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn custom_button_glass red" data-bs-toggle="modal"
+                        data-bs-target="#deleteModal">
+                    Delete
+                </button>
             </div>
 
+        </div>
+    </div>
+
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Confirmez la suppression</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Annuler</button>
+                    <a class="btn btn-info"
+                       href="{{ path('app_application_delete', {'id': application.id}) }}">Supprimer</a>
+                </div>
+            </div>
         </div>
     </div>
 
