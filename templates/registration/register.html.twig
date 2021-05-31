@@ -4,43 +4,48 @@
 
 {% block body %}
 
+
     {% for flashError in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+        <div class="alert alert-danger flash nav_glass text-dark text-center fs-5" role="alert">{{ flashError }}</div>
     {% endfor %}
 
-    <div class="" style="margin-top: 5rem; margin-bottom: 3rem;">
 
-        <div class="row">
-            <div class="col-4 mx-auto">
+    <div class="row top-50">
+        <div class="col-3 m-auto">
 
-                <div class="card p-3" style="transform: translateY(50%)">
+            <div class="custom_glass">
+                <h1 class="h2 mt-4 mb-5 text-center font-weight-normal">Register</h1>
 
-                    <h1 class="h3 mb-5 text-center font-weight-normal">Register</h1>
+                {{ form_start(registrationForm, {"attr": {"class": "form_glass"}}) }}
 
-                    {{ form_start(registrationForm) }}
-
-                    <div class="mb-3">
-                        {{ form_row(registrationForm.email) }}
-                    </div>
-
-                    <div>
-                        {{ form_row(registrationForm.plainPassword, {
-                            label: 'Password'
-                        }) }}
-                    </div>
-                    <div class="ms-2">
-                        {{ form_row(registrationForm.agreeTerms) }}
-                    </div>
-
-                    <div class="d-grid mt-4">
-                        <button type="submit" class="btn btn-primary px-4">Register</button>
-                    </div>
-                    {{ form_end(registrationForm) }}
-
+                <div class="mb-4">
+                    {{ form_row(registrationForm.email) }}
                 </div>
+
+                <div class="mb-2">
+                    {{ form_row(registrationForm.plainPassword.first, {label: 'Password'}) }}
+                </div>
+
+                <div class="mb-2">
+                    {{ form_row(registrationForm.plainPassword.second, {label: 'Repeat Pasword'}) }}
+                </div>
+
+                <div class="mx-2">
+                    {{ form_row(registrationForm.agreeTerms) }}
+                </div>
+
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('register') }}">
+
+                <div class="d-grid mt-4">
+                    <button type="submit" class="btn btn-primary px-4">Register</button>
+                </div>
+
+                {{ form_end(registrationForm) }}
             </div>
+
         </div>
     </div>
+
 
 
 {% endblock %}

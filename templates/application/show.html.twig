@@ -6,31 +6,38 @@
 
     <div class="text-center" style="margin-top: 5rem; margin-bottom: 3rem;">
         <h1>{{ application.nomEntreprise }}</h1>
-        <button type="button" class="btn btn-info px-4" data-bs-toggle="modal" data-bs-target="#applicationModal">
+        <button type="button" class="btn custom_button_glass px-4" data-bs-toggle="modal" data-bs-target="#applicationModal">
             <i class="fas fa-plus"></i>
         </button>
     </div>
 
-    <div class="container">
 
-        <ul class="list-group list-group-flush shadow rounded px-3">
-            <li class="list-group-item py-3"><strong>Nom Entreprise : </strong>{{ application.nomEntreprise }}</li>
-            <li class="list-group-item py-3"><strong>Localisation : </strong>{{ application.localisationEntreprise }}</li>
-            <li class="list-group-item py-3"><strong>Poste Recherché : </strong>{{ application.posteRecherche }}</li>
-            <li class="list-group-item py-3"><strong>Lien de l'annonce : </strong>{{ application.lienCandidature }}</li>
-            <li class="list-group-item py-3"><strong>Nature Candidature : </strong>{{ application.natureCandidature }}</li>
-            <li class="list-group-item py-3"><strong>Date Candidature : </strong>{{ application.dateCandidature | date('d/m/Y') }}</li>
-            <li class="list-group-item py-3"><strong>Email de Contact : </strong>{{ application.emailContact }}</li>
-            <li class="list-group-item py-3"><strong>Technos : </strong>{{ application.technos }}</li>
-            <li class="list-group-item py-3"><strong>Remarques : </strong>{{ application.remarques }}</li>
-        </ul>
+    <div class="row">
+        <div class="col-8 m-auto">
 
+            <div class="">
+                <a class="text-dark text-decoration-none" href="{{ path('app_application') }}"><< Back</a>
+            </div>
+            <ul class="list-group list-group-flush list_glass">
+                <li class="list-group-item py-3 list_glass-items"><strong>Nom Entreprise : </strong>{{ application.nomEntreprise }}</li>
+                <li class="list-group-item py-3 list_glass-items"><strong>Localisation : </strong>{{ application.localisationEntreprise }}</li>
+                <li class="list-group-item py-3 list_glass-items"><strong>Poste Recherché : </strong>{{ application.posteRecherche }}</li>
+                <li class="list-group-item py-3 list_glass-items"><strong>Lien de l'annonce : </strong>{{ application.lienCandidature }}</li>
+                <li class="list-group-item py-3 list_glass-items"><strong>Nature Candidature : </strong>{{ application.natureCandidature }}</li>
+                <li class="list-group-item py-3 list_glass-items"><strong>Date Candidature : </strong>{{ application.dateCandidature | date('d/m/Y') }}</li>
+                <li class="list-group-item py-3 list_glass-items"><strong>Email de Contact : </strong>{{ application.emailContact }}</li>
+                <li class="list-group-item py-3 list_glass-items"><strong>Technos : </strong>{{ application.technos }}</li>
+                <li class="list-group-item py-3 list_glass-items"><strong>Remarques : </strong>{{ application.remarques }}</li>
+            </ul>
+
+            <div class="text-center mt-5">
+                <a class="btn custom_button_glass red" href="">Delete</a>
+            </div>
+
+        </div>
     </div>
 
 
     {% include '_partials/_modal.html.twig' %}
-
-
-
 
 {% endblock %}

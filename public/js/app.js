@@ -5,9 +5,9 @@ const app = {
 
    init: () => {
 
-       if (app.pathname === '/login' || app.pathname === '/applications' || app.pathname === 'register') {
-           app.navbar.classList.replace('navbar-dark', 'navbar-light')
-           app.footer.style.display = "none"
+       if (app.pathname !== '/') {
+           // app.navbar.classList.replace('navbar-dark', 'navbar-light');
+           app.navbar.classList.replace('nav_transparent', 'nav_glass')
        }
 
    },

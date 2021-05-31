@@ -1,42 +1,165 @@
+/*☻*/
+
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body {
-    background: #e6e6e6;
+main {
+    position: relative;
 }
 
-.bg-dark {
-    background-color: transparent !important;
+.flash {
+    position: absolute;
+    width: 50%;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: none;
 }
+
+.custom_button_glass {
+    background: rgba(255, 255, 255, 0.10) !important;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    border: 1px solid rgba(253, 235, 235, 0.20);
+    box-shadow: 0 0 15px 2px rgba(255, 255, 255, 0.15) !important;
+    color: white;
+    transition: 0.3s;
+}
+
+.custom_button_glass:hover {
+    background: rgba(255, 255, 255, 0.20) !important;
+    box-shadow: 0 0 12px 2px rgba(255, 255, 255, 0.10) !important;
+}
+
+.red:hover {
+    color: crimson;
+}
+
+/* NAVBAR */
+
 
 .nav-text-dark {
     color: #e6e6e6;
 }
 
+.nav_transparent {
+    background: transparent !important;
+}
+
+.nav_glass {
+    background: rgba(255, 255, 255, 0.20) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(253, 235, 235, 0.20);
+    box-shadow: 0 5px 20px 2px rgba(255, 255, 255, 0.25) !important;
+}
+
+
+/* BACKGROUND DE FOND DE PAGE */
+
+
 .bg {
-    background-image: radial-gradient(circle at 29% 55%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 4%, transparent 4%, transparent 44%, transparent 44%, transparent 100%), radial-gradient(circle at 85% 89%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 51%, transparent 51%, transparent 52%, transparent 52%, transparent 100%), radial-gradient(circle at 6% 90%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 53%, transparent 53%, transparent 64%, transparent 64%, transparent 100%), radial-gradient(circle at 35% 75%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 6%, transparent 6%, transparent 98%, transparent 98%, transparent 100%), radial-gradient(circle at 56% 75%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 16%, transparent 16%, transparent 23%, transparent 23%, transparent 100%), radial-gradient(circle at 42% 0%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 3%, transparent 3%, transparent 26%, transparent 26%, transparent 100%), radial-gradient(circle at 29% 28%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 51%, transparent 51%, transparent 75%, transparent 75%, transparent 100%), radial-gradient(circle at 77% 21%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 35%, transparent 35%, transparent 55%, transparent 55%, transparent 100%), radial-gradient(circle at 65% 91%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 46%, transparent 46%, transparent 76%, transparent 76%, transparent 100%), linear-gradient(45deg, rgb(83, 171, 235), rgb(171, 0, 185));
+    background-image: radial-gradient(circle at 29% 55%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 4%, transparent 4%, transparent 44%, transparent 44%, transparent 100%), radial-gradient(circle at 85% 89%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 51%, transparent 51%, transparent 52%, transparent 52%, transparent 100%), radial-gradient(circle at 6% 90%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 53%, transparent 53%, transparent 64%, transparent 64%, transparent 100%), radial-gradient(circle at 35% 75%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 6%, transparent 6%, transparent 98%, transparent 98%, transparent 100%), radial-gradient(circle at 56% 75%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 16%, transparent 16%, transparent 23%, transparent 23%, transparent 100%), radial-gradient(circle at 42% 0%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 3%, transparent 3%, transparent 26%, transparent 26%, transparent 100%), radial-gradient(circle at 29% 28%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 51%, transparent 51%, transparent 75%, transparent 75%, transparent 100%), radial-gradient(circle at 77% 21%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 35%, transparent 35%, transparent 55%, transparent 55%, transparent 100%), radial-gradient(circle at 65% 91%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 46%, transparent 46%, transparent 76%, transparent 76%, transparent 100%), linear-gradient(45deg, rgba(27, 159, 255, 0.75), rgb(182 0 197));;
     background-position: center center;
     background-repeat: no-repeat;
     -moz-background-size: cover;
+
     position: absolute;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
+    max-width: 100vw;
+    max-height: 100vh;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
 }
 
-/* PAGE D'ACCUEILL */
+
+/* PAGE D'ACCUEIL */
+
 
 .presentation {
     position: absolute;
-    top: 40%;
+    top: 50%;
     left: 50%;
-    transform: translate(-50%, -40%);
+    transform: translate(-50%, -60%);
+}
 
-    max-width: 500px;
+.presentation p {
+    text-align: justify;
+}
+
+
+/* PAGES APPLICATIONS */
+
+/* LIST */
+.table_glass {
+    background: rgba(255, 255, 255, 0.20);
+    box-shadow: 0 8px 32px 0 rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-radius: 5px;
+    border: 1px solid rgba(253, 235, 235, 0.20);
+}
+
+.table_glass thead {
+    background: rgba(255, 255, 255, 0.10);
+}
+
+table > tbody > tr {
+    transition: 0.3s;
+}
+
+table > tbody > tr:hover {
+    background: rgba(255, 255, 255, 0.20);
+}
+
+/* SHOW */
+.list_glass {
+    box-shadow: 0 8px 32px 0 rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+}
+
+.list_glass-items {
+    background: rgba(255, 255, 255, 0.15);
+    transition: 0.3s;
+}
+
+.list_glass-items:hover {
+    background: rgba(255, 255, 255, 0.20);
+}
+
+
+
+/* PAGE DE LOGIN */
+
+
+.top-50 {
+    transform: translateY(65%);
+}
+
+label {
+    margin-left: 1rem !important;
+    margin-bottom: 0.5rem !important;
+}
+
+form.form_glass input.form-control {
+    background: rgba(255,255,255,0.15) !important;
+    border: 1px solid rgba(253, 235, 235, 0.30);
+    border-radius: 50px;
+    padding: 0.4rem 1.5rem;
+}
+
+form.form_glass input.form-control:focus {
+    background: rgba(255,255,255,0.15) !important;
+}
+
+.custom_glass {
     padding: 1.5rem;
 
     background: rgba(255, 255, 255, 0.12);
@@ -44,87 +167,15 @@ body {
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
     border-radius: 5px;
-    border: 1px solid rgba(236, 236, 236, 0.20);
+    border: 1px solid rgba(253, 235, 235, 0.20);
 }
 
-.presentation p {
-    text-align: justify;
-}
-
-/* PAGE DE LOGIN */
-
-.login {
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    max-width: 450px;
-    width: 100%;
-}
-
-.login_box {
-    position: relative;
-    border-radius: 10px;
-    background: #e6e6e6;
-    box-shadow:  -4px -4px 12px 2px rgba(255, 255, 255, 0.75),
-    3px 3px 8px 2px rgba(94, 104, 121, 0.30);
-}
-
-.login_box__img {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translate(-50%, -40px);
-    width: 90px;
-    height: 90px;
-    border-radius: 50px;
-    box-shadow: 0 0 2px #5f5f5f,
-                0 0 0 5px #ecf0f3,
-                8px 8px 15px #a7aaaf,
-                -8px -8px 15px #ffffff
-
-}
-
-.login_box .field {
-    height: 50px;
-    width: 100%;
-    display: flex;
-    position: relative;
-}
-
-.field input{
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    padding-left: 45px;
-    font-size: 18px;
-    outline: none;
-    border: none;
-    color: #595959;
-    background: #e6e6e6;
-    border-radius: 25px;
-    box-shadow: inset 2px 2px 5px rgba(94, 104, 121, 0.30),
-    inset -5px -5px 10px rgba(255, 255, 255, 0.75);
-    transition: 0.3s;
-}
-
-.field input:focus{
-    background: #f3f3f3;
-}
-
-.field input:focus ~ label {
-    display: none;
-}
-
-.field label {
-    position: absolute;
-    left: 10%;
-    top: 20%;
-    font-size: 1.2rem;
-
+form.form_glass input[type="checkbox"] {
+    border-radius: 50%;
 }
 
 /* FOOTER */
+
 
 .footer {
     position: absolute;
@@ -138,16 +189,17 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-left: 0 !important;
 }
 
 .social__list {
     position: relative;
     width: 45px;
     height: 45px;
-    margin: 0 2rem;
+    margin: 0 3rem;
 
     border-radius: 5px;
-    border: 1px solid rgba(255, 255, 255, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.65);
     transform: rotate(45deg);
 
     box-shadow: 0 0 32px 0 rgba(255, 255, 255, 0.30);
@@ -155,7 +207,8 @@ body {
 }
 
 .social__list:hover {
-    box-shadow: 0 0 25px 0 rgba(236, 0, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    box-shadow: 0 0 25px 0 rgba(231, 1, 255, 0.5);
 }
 
 .social__links {

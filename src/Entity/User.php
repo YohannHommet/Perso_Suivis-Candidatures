@@ -31,7 +31,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="json")
      */
-    private array $roles = ['ROLE_USER'];
+    private array $roles = [];
 
     /**
      * @var string The hashed password

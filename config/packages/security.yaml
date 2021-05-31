@@ -1,4 +1,19 @@
+framework:
+    rate_limiter:
+        # define 2 rate limiters (one for username+IP, the other for IP)
+        username_ip_login:
+            policy: token_bucket
+            limit: 5
+            rate: { interval: '5 minutes' }
+
+        ip_login:
+            policy: sliding_window
+            limit: 50
+            interval: '15 minutes'
+
 security:
+    enable_authenticator_manager: true
+
     encoders:
         App\Entity\User:
             algorithm: auto
@@ -10,21 +25,34 @@ security:
             entity:
                 class: App\Entity\User
                 property: email
+
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            anonymous: true
             lazy: true
             provider: app_user_provider
             guard:
                 authenticators:
                     - App\Security\LoginAuthenticator
+            login_throttling:
+                max_attempts: 3
             logout:
                 path: app_logout
                 # where to redirect after logout
-                # target: app_any_route
+                target: app_home
+
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 100000 # 1 week in seconds
+                path: /
+                secure: true
+                # by default, the feature is enabled by checking a
+                # checkbox in the login form (see below), uncomment the
+                # following line to always enable it.
+                #always_remember_me: true
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
@@ -36,4 +64,6 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/, roles: ROLE_USER }
+        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/applications, roles: [IS_AUTHENTICATED_FULLY, ROLE_USER]}
+

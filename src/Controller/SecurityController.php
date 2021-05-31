@@ -10,11 +10,12 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class SecurityController extends AbstractController
 {
     /**
-     * @Route("/login", name="app_login")
+     * @Route("/login", name="app_login", methods={"GET|POST"})
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
          if ($this->getUser()) {
+             $this->addFlash("info", "Already Logged In !");
              return $this->redirectToRoute('app_home');
          }
 
@@ -23,6 +24,8 @@ class SecurityController extends AbstractController
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
+        $this->addFlash("success", "Welcome back, $lastUsername");
+
         return $this->render('security/login.html.twig', [
             'last_username' => $lastUsername,
             'error' => $error
@@ -30,10 +33,11 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/logout", name="app_logout")
+     * @Route("/logout", name="app_logout", methods={"GET|POST"})
      */
     public function logout(): void
     {
+        $this->addFlash('info', "See you soon !");
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Applications;
+use App\Entity\User;
 use App\Form\ApplicationsFormType;
 use App\Repository\ApplicationsRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -31,8 +32,15 @@ class ApplicationController extends AbstractController
      */
     public function index(Request $request, EntityManagerInterface $em, ApplicationsRepository $repository): Response
     {
-        $application = new Applications();
+        /** @var User $user */
+        $user = $this->getUser();
+        if (!$user->isVerified()) {
+//            throw $this->createAccessDeniedException("Vous devez vérifier votre compte pour accéder à cette page.");
+            $this->addFlash('danger', "Vous devez vérifier votre compte pour accéder à cette page.");
+            return $this->redirectToRoute("app_home");
+        }
 
+        $application = new Applications();
         $form = $this->createForm(ApplicationsFormType::class, $application);
         $form->handleRequest($request);
 
@@ -40,6 +48,7 @@ class ApplicationController extends AbstractController
             $em->persist($application);
             $em->flush();
 
+            $this->addFlash('success', "Candidature ajoutée chef !");
             return $this->redirectToRoute("app_application");
         }
 
@@ -52,9 +61,23 @@ class ApplicationController extends AbstractController
 
     /**
      * @Route("/application/{id}", name="app_application_show", methods={"GET|POST"})
+     *
+     * @param Applications $applications
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     *
+     * @return Response
      */
     public function show(Applications $applications, Request $request, EntityManagerInterface $em): Response
     {
+        /** @var User $user */
+        $user = $this->getUser();
+        if (!$user->isVerified()) {
+//            throw $this->createAccessDeniedException("Vous devez vérifier votre compte pour accéder à cette page.");
+            $this->addFlash('danger', "Vous devez vérifier votre compte pour accéder à cette page.");
+            return $this->redirectToRoute("app_home");
+        }
+
         $form = $this->createForm(ApplicationsFormType::class, $applications);
         $form->handleRequest($request);
 
@@ -62,6 +85,7 @@ class ApplicationController extends AbstractController
             $em->persist($applications);
             $em->flush();
 
+            $this->addFlash('success', "Les données ont été mises à jour.");
             return $this->redirectToRoute("app_application_show", ['id' => $applications->getId()]);
         }
 
