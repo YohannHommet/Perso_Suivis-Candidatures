@@ -21,21 +21,27 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ApplicationController extends AbstractController
 {
+
+    private EntityManagerInterface $em;
+
+    public function __construct(EntityManagerInterface $em)
+    {
+        $this->em = $em;
+    }
+
     /**
      * @Route("/applications", name="app_application", methods={"GET|POST"})
      *
      * @param Request $request
-     * @param EntityManagerInterface $em
      * @param ApplicationsRepository $repository
      *
      * @return Response
      */
-    public function index(Request $request, EntityManagerInterface $em, ApplicationsRepository $repository): Response
+    public function index(Request $request, ApplicationsRepository $repository): Response
     {
         /** @var User $user */
         $user = $this->getUser();
         if (!$user->isVerified()) {
-//            throw $this->createAccessDeniedException("Vous devez vérifier votre compte pour accéder à cette page.");
             $this->addFlash('danger', "Vous devez vérifier votre compte pour accéder à cette page.");
             return $this->redirectToRoute("app_home");
         }
@@ -45,8 +51,8 @@ class ApplicationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em->persist($application);
-            $em->flush();
+            $this->em->persist($application);
+            $this->em->flush();
 
             $this->addFlash('success', "Candidature ajoutée chef !");
             return $this->redirectToRoute("app_application");
@@ -59,21 +65,20 @@ class ApplicationController extends AbstractController
         ]);
     }
 
+
     /**
      * @Route("/application/{id}", name="app_application_show", methods={"GET|POST"})
      *
      * @param Applications $applications
      * @param Request $request
-     * @param EntityManagerInterface $em
-     *
+     * 
      * @return Response
      */
-    public function show(Applications $applications, Request $request, EntityManagerInterface $em): Response
+    public function show(Applications $applications, Request $request): Response
     {
         /** @var User $user */
         $user = $this->getUser();
         if (!$user->isVerified()) {
-//            throw $this->createAccessDeniedException("Vous devez vérifier votre compte pour accéder à cette page.");
             $this->addFlash('danger', "Vous devez vérifier votre compte pour accéder à cette page.");
             return $this->redirectToRoute("app_home");
         }
@@ -82,8 +87,8 @@ class ApplicationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em->persist($applications);
-            $em->flush();
+            $this->em->persist($applications);
+            $this->em->flush();
 
             $this->addFlash('success', "Les données ont été mises à jour.");
             return $this->redirectToRoute("app_application_show", ['id' => $applications->getId()]);
@@ -94,5 +99,31 @@ class ApplicationController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
+
+    /**
+     * @Route("/application/{id}/delete", name="app_application_delete", methods={"GET|POST"})
+     * 
+     * @param Applications $applications
+     * 
+     * @return Response
+     */
+    public function delete(Applications $applications): Response
+    {
+        /** @var User $user */
+        $user = $this->getUser();
+        if (!$user->isVerified()) {
+            $this->addFlash('danger', "Vous devez vérifier votre compte pour accéder à cette page.");
+            return $this->redirectToRoute("app_home");
+        }
+        
+        $this->em->remove($applications);
+        $this->em->flush();
+        
+        $this->addFlash("info", "Cette candidature a bien été effacée");
+        return $this->redirectToRoute("app_application");
+    }
+    
+    
 
 }
