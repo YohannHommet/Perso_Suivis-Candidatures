@@ -1,6 +1,14 @@
 {
     "type": "project",
-    "license": "proprietary",
+    "name": "yohann/suivi_candidature",
+    "description": "Suivez vos candidatures !",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "YohannHommet",
+            "email": "yohann.hommet@outlook.fr"
+        }
+    ],
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
