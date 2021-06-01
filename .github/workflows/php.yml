@@ -62,4 +62,8 @@ jobs:
         VALIDATE_ALL_CODEBASE: false
         DEFAULT_BRANCH: main
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Lint Action
+      uses: wearerequired/lint-action@v1.10.0
+
 
