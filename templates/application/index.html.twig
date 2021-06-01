@@ -5,7 +5,7 @@
 {% block body %}
 
     <div class="text-center" style="margin-top: 5rem; margin-bottom: 3rem;">
-        <h1>Liste des Candidatures</h1>
+        <h1 class="mb-3">Liste des Candidatures</h1>
         <button type="button" class="btn custom_button_glass px-4" data-bs-toggle="modal" data-bs-target="#applicationModal">
             <i class="fas fa-plus"></i>
         </button>
@@ -15,31 +15,31 @@
 
         <table class="table table-lg table-stripped table-responsive table_glass">
             <thead class="">
-            <tr>
+            <tr class="m-auto">
                 <th scope="col">Nom Entreprise</th>
-                <th scope="col">Localisation</th>
+                <th scope="col" class="d-none d-lg-table-cell">Localisation</th>
                 <th scope="col">Poste Recherché</th>
-                <th scope="col">Lien de l'annonce</th>
-                <th scope="col">Nature Candidature</th>
+                <th scope="col" class="d-none d-md-table-cell">Lien de l'annonce</th>
+                <th scope="col" class="d-none d-md-table-cell">Nature Candidature</th>
                 <th scope="col">Date Candidature</th>
-                <th scope="col">Email de Contact</th>
+                <th scope="col" class="d-none d-lg-table-cell">Email de Contact</th>
                 <th scope="col">Technos</th>
-                <th scope="col">Remarques</th>
+                <th scope="col" class="d-none d-md-table-cell">Remarques</th>
             </tr>
             </thead>
 
             <tbody class="table-stripped">
             {% for application in applications %}
-                <tr>
+                <tr class="m-auto">
                     <td class="text-underline-none fw-bold"><a href="{{ path('app_application_show', {'id': application.id}) }}">{{ application.nomEntreprise | upper }}</a></td>
-                    <td>{{ application.localisationEntreprise }}</td>
+                    <td class="d-none d-lg-table-cell">{{ application.localisationEntreprise }}</td>
                     <td>{{ application.posteRecherche }}</td>
-                    <td><a href="{{ application.lienCandidature }}">{{ application.lienCandidature | u.truncate(15, '...')  }}</a></td>
-                    <td>{{ application.natureCandidature }}</td>
+                    <td class="d-none d-md-table-cell"><a href="{{ application.lienCandidature }}">{{ application.lienCandidature | u.truncate(15, '...')  }}</a></td>
+                    <td class="d-none d-md-table-cell">{{ application.natureCandidature }}</td>
                     <td>{{ application.dateCandidature | date('d/m/Y') }}</td>
-                    <td>{{ application.emailContact }}</td>
+                    <td class="d-none d-lg-table-cell">{{ application.emailContact }}</td>
                     <td>{{ application.technos }}</td>
-                    <td>{{ application.remarques | u.truncate(12, '..', false) }}</td>
+                    <td class="d-none d-md-table-cell">{{ application.remarques | u.truncate(12, '..', false) }}</td>
                 </tr>
             {% endfor %}
             </tbody>

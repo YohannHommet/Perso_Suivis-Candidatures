@@ -1,24 +1,51 @@
 /*☻*/
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Yusei+Magic&display=swap');
+
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
 }
 
 main {
     position: relative;
 }
 
-.flash {
+
+/* FLASH MESSAGE */
+
+
+#flash {
     position: absolute;
-    width: 50%;
     top: 10%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border: none;
+    right: 0;
+
+    background: rgba(255, 255, 255, 0.30) !important;
+    border: 1px solid rgba(253, 235, 235, 0.20);
+    color: black;
+    transition: 0.3s;
+
+    z-index: 100;
 }
+.alert {
+    position: relative;
+    padding: 0.75rem 2rem;
+    margin-bottom: 1rem;
+    border-radius: none !important;
+}
+.alert-dismissible {
+    padding-right: 4.5rem !important;
+}
+.alert-dismissible .btn-close {
+    padding: 1rem 1rem;
+}
+
+
+/* GLASS EFFECT */
+
 
 .custom_button_glass {
     background: rgba(255, 255, 255, 0.10) !important;

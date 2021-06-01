@@ -4,21 +4,23 @@
 
 {% block body %}
 
-    <div class="text-center" style="margin-top: 5rem; margin-bottom: 3rem;">
-        <h1>{{ application.nomEntreprise }}</h1>
-        <button type="button" class="btn custom_button_glass px-4" data-bs-toggle="modal"
-                data-bs-target="#applicationModal">
-            <i class="fas fa-plus"></i>
-        </button>
-    </div>
+<div class="text-center" style="margin-top: 5rem; margin-bottom: 3rem;">
+    <h1 class="mb-3">{{ application.nomEntreprise }}</h1>
+    <button type="button" class="btn custom_button_glass px-4" data-bs-toggle="modal"
+        data-bs-target="#applicationModal">
+        <i class="fas fa-plus"></i>
+    </button>
+</div>
 
 
-    <div class="row">
-        <div class="col-8 m-auto">
+<div class="row">
+    <div class="col-8 m-auto">
 
-            <div class="">
-                <a class="text-dark text-decoration-none" href="{{ path('app_application') }}"><< Back</a>
-            </div>
+        <div class="mb-1">
+            <a class="text-dark text-black" href="{{ path('app_application') }}">
+                < Back
+            </a> 
+        </div> 
             <ul class="list-group list-group-flush list_glass">
                 <li class="list-group-item py-3 list_glass-items"><strong>Nom Entreprise
                         : </strong>{{ application.nomEntreprise }}</li>
@@ -34,19 +36,20 @@
                         : </strong>{{ application.dateCandidature | date('d/m/Y') }}</li>
                 <li class="list-group-item py-3 list_glass-items"><strong>Email de Contact
                         : </strong>{{ application.emailContact }}</li>
-                <li class="list-group-item py-3 list_glass-items"><strong>Technos : </strong>{{ application.technos }}
+                <li class="list-group-item py-3 list_glass-items"><strong>Technos :
+                    </strong>{{ application.technos }}
                 </li>
                 <li class="list-group-item py-3 list_glass-items"><strong>Remarques
                         : </strong>{{ application.remarques }}</li>
-            </ul>
+                    </ul>
 
-            <div class="text-center mt-5">
-                <!-- Button trigger modal -->
-                <button type="button" class="btn custom_button_glass red" data-bs-toggle="modal"
-                        data-bs-target="#deleteModal">
-                    Delete
-                </button>
-            </div>
+                    <div class="text-center mt-5">
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn custom_button_glass red" data-bs-toggle="modal"
+                            data-bs-target="#deleteModal">
+                            Delete
+                        </button>
+                    </div>
 
         </div>
     </div>
@@ -65,7 +68,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Annuler</button>
                     <a class="btn btn-info"
-                       href="{{ path('app_application_delete', {'id': application.id}) }}">Supprimer</a>
+                        href="{{ path('app_application_delete', {'id': application.id}) }}">Supprimer</a>
                 </div>
             </div>
         </div>
@@ -74,4 +77,4 @@
 
     {% include '_partials/_modal.html.twig' %}
 
-{% endblock %}
+    {% endblock %}
