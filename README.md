@@ -14,4 +14,4 @@
 
 `symfony server:start` ou `php -S localhost:8000 -t public`
 
-
+This project is licensed under the terms of the MIT license.
