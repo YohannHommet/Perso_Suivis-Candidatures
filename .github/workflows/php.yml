@@ -72,3 +72,6 @@ jobs:
         restore-keys: # optional
         # The chunk size used to split up large files during upload, in bytes
         upload-chunk-size: # optional
+
+    - name: Run Playwright tests
+      uses: microsoft/playwright-github-action@v1.4.4
