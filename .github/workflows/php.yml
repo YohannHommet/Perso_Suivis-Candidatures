@@ -44,23 +44,26 @@ jobs:
         code_inspector_secret_key: ${{ secrets.CODE_INSPECTOR_SECRET_KEY }}
         min_quality_grade: 'WARNING'
         min_quality_score: '50'
-        max_defects_rate: '0.0001'
-        max_complex_functions_rate: '0.0001'
-        max_long_functions_rate: '0.0001'
+        max_defects_rate: '0.1'
+        max_complex_functions_rate: '0.1'
+        max_long_functions_rate: '0.1'
         project_name: ''
         max_timeout_sec: '600'
 
-    - name: Cache
-      uses: actions/cache@v2.1.6
-      with:
-        # A list of files, directories, and wildcard patterns to cache and restore
-        path: 
-        # An explicit key for restoring and saving the cache
-        key: 
-        # An ordered list of keys to use for restoring the cache if no cache hit occurred for key
-        restore-keys: # optional
-        # The chunk size used to split up large files during upload, in bytes
-        upload-chunk-size: # optional
-
     - name: Run Playwright tests
       uses: microsoft/playwright-github-action@v1.4.4
+      
+    #- name: Super-Linter
+     # uses: github/super-linter@v4.0.2
+      
+    - name: Lint Code Base
+      uses: docker://ghcr.io/github/super-linter:slim-v4
+      env:
+        VALIDATE_ALL_CODEBASE: false
+        DEFAULT_BRANCH: main
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Lint Action
+      uses: wearerequired/lint-action@v1.10.0
+
+
