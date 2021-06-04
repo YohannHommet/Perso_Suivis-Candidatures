@@ -10,6 +10,13 @@ const app = {
            app.navbar.classList.replace('nav_transparent', 'nav_glass')
        }
 
+       let scene = document.getElementById('scene');
+       let parallaxInstance = new Parallax(scene, {
+           relativeInput: true,
+           clipRelativeInput: true,
+
+       });
+
    },
 
 }

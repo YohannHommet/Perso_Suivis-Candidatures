@@ -131,8 +131,10 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/kelunik/certificate" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/daverandom/libdns" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/psr/http-message" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-php81" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="parallax" level="application" />
   </component>
 </module>
