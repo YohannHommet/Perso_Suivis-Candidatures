@@ -201,6 +201,10 @@ form.form_glass input[type="checkbox"] {
     border-radius: 50%;
 }
 
+.log_btn:hover {
+    background: rgb(255 255 255 / 10%);
+}
+
 /* FOOTER */
 
 

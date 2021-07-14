@@ -11,20 +11,20 @@
 
 
     <div class="row top-50" style="margin-top: 3.1rem;">
-        <div class="col-3 m-auto">
+        <div class="col-4 m-auto">
 
             <div class="custom_glass">
                 <form method="post" class="form_glass">
 
                     <h1 class="h2 mt-4 mb-5 text-center font-weight-normal">Please sign in</h1>
 
-                    <div class="mb-4">
+                    <div class="mb-3">
                         <label for="inputEmail" class="form-label">Email</label>
                         <input type="email" value="{{ last_username }}" name="email" id="inputEmail"
                                class="form-control" autocomplete="email" required autofocus>
                     </div>
 
-                    <div class="mb-2">
+                    <div class="mb-3">
                         <label for="inputPassword" class="form-label">Password</label>
                         <input type="password" name="password" id="inputPassword" class="form-control"
                                autocomplete="current-password" required>
@@ -32,12 +32,12 @@
 
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-                    <div class="mx-2">
+                    <div class="mx-3">
                         <input class="me-1 form-check-input" type="checkbox" id="remember_me" name="_remember_me">Remember me
                     </div>
 
                     <div class="d-grid mt-4">
-                        <button class="btn btn-primary px-4" type="submit">Let me in !</button>
+                        <button class="btn border px-4 rounded log_btn shadow-sm" type="submit">Let me in !</button>
                     </div>
                 </form>
             </div>

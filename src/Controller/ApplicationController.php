@@ -15,6 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 
 /**
+ * @author Yohann Hommet
  * Class ApplicationController
  * @package App\Controller
  * @IsGranted("ROLE_USER")
@@ -37,13 +38,12 @@ class ApplicationController extends AbstractController
      *
      * @return Response
      */
-    public function index(Request $request, ApplicationsRepository $repository): Response
+    public function index(Request $request): Response
     {
         /** @var User $user */
         $user = $this->getUser();
-        if (!$user->isVerified()) {
-            $this->addFlash('danger', "Vous devez vérifier votre compte pour accéder à cette page.");
-            return $this->redirectToRoute("app_home");
+        if (!$user->isVerified() && !$user) {
+            throw $this->createAccessDeniedException("Your account is not verified. Please verify your account before continuing.");
         }
 
         $application = new Applications();
@@ -58,72 +58,78 @@ class ApplicationController extends AbstractController
             return $this->redirectToRoute("app_application");
         }
 
-
         return $this->render('application/index.html.twig', [
             'form' => $form->createView(),
-            'applications' => $repository->findAll()
+            'applications' => $this->em->getRepository(Applications::class)->findAll(),
         ]);
     }
 
 
     /**
-     * @Route("/application/{id}", name="app_application_show", methods={"GET|POST"})
+     * @Route("/application/{id}", name="app_application_show", methods={"GET|POST"}, requirements={"id": "\d+"})
      *
      * @param Applications $applications
      * @param Request $request
      * 
      * @return Response
      */
-    public function show(Applications $applications, Request $request): Response
+    public function show($id, Request $request): Response
     {
-        /** @var User $user */
-        $user = $this->getUser();
-        if (!$user->isVerified()) {
-            $this->addFlash('danger', "Vous devez vérifier votre compte pour accéder à cette page.");
-            return $this->redirectToRoute("app_home");
+        // Check if $applications exists 
+        $application = $this->em->getRepository(Applications::class)->find($id);
+        if (!$application) {
+            throw $this->createNotFoundException("This application does not exist.");
+
         }
 
-        $form = $this->createForm(ApplicationsFormType::class, $applications);
+        /** @var User $user */
+        $user = $this->getUser();
+        if (!$user->isVerified() && !$user) {
+            throw $this->createAccessDeniedException("Your account is not verified. Please verify your account before continuing.");
+        }
+
+        $form = $this->createForm(ApplicationsFormType::class, $application);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->em->persist($applications);
             $this->em->flush();
-
             $this->addFlash('success', "Les données ont été mises à jour.");
-            return $this->redirectToRoute("app_application_show", ['id' => $applications->getId()]);
+
+            return $this->redirectToRoute("app_application_show", ['id' => $application->getId()]);
         }
 
         return $this->render('application/show.html.twig', [
-            'application' => $applications,
+            'application' => $this->em->getRepository(Applications::class)->find($id),
             'form' => $form->createView()
         ]);
     }
 
 
     /**
-     * @Route("/application/{id}/delete", name="app_application_delete", methods={"GET|POST"})
+     * @Route("/application/{id}/delete", name="app_application_delete", methods={"GET|POST"}, requirements={"id": "\d+"}, )
      * 
      * @param Applications $applications
      * 
      * @return Response
      */
-    public function delete(Applications $applications): Response
+    public function delete(int $id): Response
     {
+        $application = $this->em->getRepository(Applications::class)->find($id);
+        if (!$application) {
+            throw $this->createNotFoundException("This application does not exist.");
+        }
+
         /** @var User $user */
         $user = $this->getUser();
-        if (!$user->isVerified()) {
-            $this->addFlash('danger', "Vous devez vérifier votre compte pour accéder à cette page.");
-            return $this->redirectToRoute("app_home");
+        if (!$user->isVerified() && !$user) {
+            throw $this->createAccessDeniedException("Your account is not verified. Please verify your account before continuing.");
         }
         
-        $this->em->remove($applications);
+        $this->em->remove($application);
         $this->em->flush();
-        
         $this->addFlash("info", "Cette candidature a bien été effacée");
+
         return $this->redirectToRoute("app_application");
     }
-    
-    
 
 }

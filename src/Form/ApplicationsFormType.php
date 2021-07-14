@@ -17,33 +17,33 @@ class ApplicationsFormType extends AbstractType
     {
         $builder
             ->add('nom_entreprise', TextType::class, [
-                'label' => 'Entreprise'
+                'label' => 'Entreprise *'
             ])
             ->add('localisation_entreprise', TextType::class, [
-                'label' => 'Localisation'
+                'label' => 'Localisation *'
             ])
             ->add('poste_recherche', TextType::class, [
-                'label' => 'Poste recherché'
+                'label' => 'Poste recherché *'
             ])
             ->add('nature_candidature', TextType::class, [
-                'label' => 'Nature Candidature'
+                'label' => 'Nature Candidature *'
             ])
             ->add('date_candidature', DateTimeType::class, [
-                'label' => 'Date Candidature',
+                'label' => 'Date Candidature *',
                 'widget' => 'single_text',
             ])
             ->add('lien_candidature', UrlType::class, [
-                'label' => "Lien de l'annonce"
+                'label' => "Lien de l'annonce *"
             ])
             ->add('email_contact', EmailType::class, [
-                'label' => 'email du contact',
+                'label' => 'Email du contact',
                 'required' => false
             ])
             ->add('technos', TextType::class, [
-                'label' => 'technos'
+                'label' => 'Technos *'
             ])
             ->add('remarques', TextType::class, [
-                'label' => 'remarques',
+                'label' => 'Remarques',
                 'required' => false
             ])
         ;

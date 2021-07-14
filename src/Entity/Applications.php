@@ -2,18 +2,21 @@
 
 namespace App\Entity;
 
-use App\Repository\ApplicationsRepository;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ApplicationsRepository;
+use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 
 /**
  * @ORM\Entity(repositoryClass=ApplicationsRepository::class)
+ * @ORM\Table(name="applications")
+ * @ORM\HasLifecycleCallbacks
  */
 class Applications
 {
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue
+     * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
      */
     private ?int $id = null;
