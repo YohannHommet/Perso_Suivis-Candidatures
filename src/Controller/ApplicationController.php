@@ -73,13 +73,11 @@ class ApplicationController extends AbstractController
      * 
      * @return Response
      */
-    public function show($id, Request $request): Response
+    public function show(Applications $application = null, Request $request): Response
     {
         // Check if $applications exists 
-        $application = $this->em->getRepository(Applications::class)->find($id);
         if (!$application) {
             throw $this->createNotFoundException("This application does not exist.");
-
         }
 
         /** @var User $user */
@@ -99,7 +97,7 @@ class ApplicationController extends AbstractController
         }
 
         return $this->render('application/show.html.twig', [
-            'application' => $this->em->getRepository(Applications::class)->find($id),
+            'application' => $application,
             'form' => $form->createView()
         ]);
     }
@@ -112,10 +110,9 @@ class ApplicationController extends AbstractController
      * 
      * @return Response
      */
-    public function delete(int $id): Response
+    public function delete(Applications $application = null): Response
     {
-        $application = $this->em->getRepository(Applications::class)->find($id);
-        if (!$application) {
+        if (null === $application) {
             throw $this->createNotFoundException("This application does not exist.");
         }
 

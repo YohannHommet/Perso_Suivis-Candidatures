@@ -16,7 +16,7 @@ class User implements UserInterface
 {
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue
+     * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
      */
     private ?int $id = null;
@@ -25,6 +25,7 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=180, unique=true)
      * @Assert\Email()
      * @Assert\NotBlank()
+     * @Assert\Regex(pattern="/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/", message="Invalid email")
      */
     private string $email;
 
@@ -34,8 +35,10 @@ class User implements UserInterface
     private array $roles = [];
 
     /**
-     * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
+     * @Assert\Length(min=6)
+     * @Assert\Regex(pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{6,}$/", message="Password must be at least 6 characters long and contain at least one uppercase letter, one lowercase letter, one number and one special character")
      */
     private string $password;
 

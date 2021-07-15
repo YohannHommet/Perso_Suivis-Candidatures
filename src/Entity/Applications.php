@@ -66,6 +66,7 @@ class Applications
      */
     private ?string $remarques;
 
+    
     public function getId(): ?int
     {
         return $this->id;

@@ -15,7 +15,8 @@ class SecurityController extends AbstractController
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
          if ($this->getUser()) {
-             $this->addFlash("info", "You are already Logged In..");
+             $this->addFlash("info", $this->getUser()->getUsername() . ", you are already Logged In..");
+
              return $this->redirectToRoute('app_home');
          }
 
@@ -23,8 +24,6 @@ class SecurityController extends AbstractController
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
-
-        $this->addFlash("success", "Welcome back, $lastUsername");
 
         return $this->render('security/login.html.twig', [
             'last_username' => $lastUsername,
@@ -37,7 +36,7 @@ class SecurityController extends AbstractController
      */
     public function logout(): void
     {
-        $this->addFlash('info', "See you soon !");
+        $this->addFlash('info', "See you soon bro !");
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 }
