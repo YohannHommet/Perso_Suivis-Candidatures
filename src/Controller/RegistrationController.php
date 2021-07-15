@@ -38,7 +38,7 @@ class RegistrationController extends AbstractController
 
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
-
+        
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setPassword($passwordEncoder->encodePassword($user, $form->get('plainPassword')->getData()));
 
@@ -54,7 +54,7 @@ class RegistrationController extends AbstractController
             // generate a signed url and email it to the user
             $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
                 (new TemplatedEmail())
-                    ->from(new Address('yohann.hommet@outlook.fr', 'cMa Mail Bot'))
+                    ->from(new Address('checkmyapllications@gmail.com', 'cMa Mail Bot'))
                     ->to($user->getEmail())
                     ->subject('Please Confirm your Email')
                     ->htmlTemplate('registration/confirmation_email.html.twig')
@@ -62,12 +62,13 @@ class RegistrationController extends AbstractController
 
             // do anything else you need here, like send an email
 
-//            $email = (new Email())
-//                ->from('promo.trinipero@gmail.com')
-//                ->to('promo.trinipero@gmail.com')
-//                ->subject('Check new account')
-//                ->text("check account : " . $user->getUsername());
-//            $mailer->send($email);
+        //            $email = (new Email())
+        //                ->from('promo.trinipero@gmail.com')
+        //                ->to('promo.trinipero@gmail.com')
+        //                ->subject('Check new account')
+        //                ->text("check account : " . $user->getUsername());
+        //            $mailer->send($email);
+            $this->addFlash("info", "Account created, please check your email for confirmation");
 
             return $guardHandler->authenticateUserAndHandleSuccess(
                 $user,
