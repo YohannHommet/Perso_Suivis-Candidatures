@@ -24,7 +24,6 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      * @Assert\Email()
-     * @Assert\Regex(pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i", message="Invalid email")
      */
     private string $email;
 
@@ -35,8 +34,6 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string")
-     * @Assert\Length(min=6)
-     * @Assert\Regex(pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{6,}$/", message="Password must be at least 6 characters long and contain at least one uppercase letter, one lowercase letter, one number and one special character")
      */
     private string $password;
 
