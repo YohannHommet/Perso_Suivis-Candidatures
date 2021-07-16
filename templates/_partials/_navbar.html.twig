@@ -1,12 +1,17 @@
-
 <nav class="navbar fixed-top navbar-expand-fluid navbar-dark bg-dark shadow nav_transparent" id="nav">
 
     <div class="container-fluid px-3 m-0 g-0">
         <a class="navbar-brand" href="{{ path('app_home') }}">CheckMyApplications</a>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">Menu
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <div class="d-flex align-items-center">
+            {% if app.user %}
+                <a href="" class="text-end me-3 d-block" style="color: rgba(255,255,255,70%);">{{ app.user.username }}</a>
+            {% endif %}
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">Menu
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
 
         <div class="collapse navbar-collapse mx-auto" id="navbarNav">
             <ul class="navbar-nav">
@@ -14,13 +19,15 @@
                     <a class="nav-link fs-5" href="{{ path('app_application') }}">Applications</a>
                 </li>
                 {% if not app.user %}
-                    <li class="nav-item text-center d-inline-flex justify-content-center">
-                        <a class="nav-link fs-5" href="{{ path('app_register') }}">Register</a><span class="fs-4 text-white px-2 pt-1">-</span><a class="nav-link fs-5" href="{{ path('app_login') }}">Login</a>                    </li>
+                <li class="nav-item text-center d-inline-flex justify-content-center">
+                    <a class="nav-link fs-5" href="{{ path('app_register') }}">Register</a><span
+                        class="fs-4 text-white px-2 pt-1">-</span><a class="nav-link fs-5"
+                        href="{{ path('app_login') }}">Login</a> </li>
                 {% endif %}
                 {% if app.user %}
-                    <li class="nav-item text-center">
-                        <a class="nav-link fs-5" href="{{ path('app_logout') }}">Logout</a>
-                    </li>
+                <li class="nav-item text-center">
+                    <a class="nav-link fs-5" href="{{ path('app_logout') }}">Logout</a>
+                </li>
                 {% endif %}
             </ul>
         </div>

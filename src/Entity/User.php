@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -24,7 +26,6 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      * @Assert\Email()
-     * @Assert\Regex(pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i", message="Invalid email")
      */
     private string $email;
 
@@ -35,8 +36,6 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string")
-     * @Assert\Length(min=6)
-     * @Assert\Regex(pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{6,}$/", message="Password must be at least 6 characters long and contain at least one uppercase letter, one lowercase letter, one number and one special character")
      */
     private string $password;
 
@@ -44,6 +43,25 @@ class User implements UserInterface
      * @ORM\Column(type="boolean")
      */
     private bool $isVerified = false;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Applications::class, mappedBy="user")
+     */
+    private $applications;
+
+
+    public function __construct()
+    {
+        $this->applications = new ArrayCollection();
+    }
+
+    /**
+     * Return Email of the user.
+     */
+    public function __toString()
+    {
+        return $this->email;
+    }
 
 
     public function getId(): int
@@ -132,6 +150,36 @@ class User implements UserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Applications[]
+     */
+    public function getApplications(): Collection
+    {
+        return $this->applications;
+    }
+
+    public function addApplication(Applications $application): self
+    {
+        if (!$this->applications->contains($application)) {
+            $this->applications[] = $application;
+            $application->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeApplication(Applications $application): self
+    {
+        if ($this->applications->removeElement($application)) {
+            // set the owning side to null (unless already changed)
+            if ($application->getUser() === $this) {
+                $application->setUser(null);
+            }
+        }
 
         return $this;
     }
