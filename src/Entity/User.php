@@ -49,9 +49,18 @@ class User implements UserInterface
      */
     private $applications;
 
+
     public function __construct()
     {
         $this->applications = new ArrayCollection();
+    }
+
+    /**
+     * Return Email of the user.
+     */
+    public function __toString()
+    {
+        return $this->email;
     }
 
 

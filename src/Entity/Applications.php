@@ -198,4 +198,5 @@ class Applications
 
         return $this;
     }
+    
 }

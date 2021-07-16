@@ -2,16 +2,19 @@
 
 namespace App\Controller;
 
-use App\Entity\Applications;
 use App\Entity\User;
+use App\Entity\Applications;
 use App\Form\ApplicationsFormType;
-use App\Repository\ApplicationsRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\ApplicationsRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 
 
 /**
@@ -24,10 +27,12 @@ class ApplicationController extends AbstractController
 {
 
     private EntityManagerInterface $em;
+    private CsrfTokenManagerInterface $csrfTokenManager;
 
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(EntityManagerInterface $em, CsrfTokenManagerInterface $csrfTokenManager)
     {
         $this->em = $em;
+        $this->csrfTokenManager = $csrfTokenManager;
     }
 
     /**
@@ -42,25 +47,34 @@ class ApplicationController extends AbstractController
     {
         /** @var User $user */
         $user = $this->getUser();
-        if (!$user->isVerified() && !$user) {
-            throw $this->createAccessDeniedException("Your account is not verified. Please verify your account before continuing.");
-        }
+        // Check if the user can access
+        $this->isLogged($user);
+        $this->isVerified($user);
 
         $application = new Applications();
+
         $form = $this->createForm(ApplicationsFormType::class, $application);
         $form->handleRequest($request);
-
+        
         if ($form->isSubmitted() && $form->isValid()) {
+            // Gestion Token
+            $token = new CsrfToken('application', $request->get('_csrf_token'));
+            if (!$this->csrfTokenManager->isTokenValid($token)) {
+                throw new InvalidCsrfTokenException();
+            }
+
+            $application->setUser($user);
             $this->em->persist($application);
             $this->em->flush();
 
             $this->addFlash('success', "Candidature ajoutée chef !");
+
             return $this->redirectToRoute("app_application");
         }
 
         return $this->render('application/index.html.twig', [
             'form' => $form->createView(),
-            'applications' => $this->em->getRepository(Applications::class)->findAll(),
+            'applications' => $this->em->getRepository(Applications::class)->findBy(['user' => $user]),
         ]);
     }
 
@@ -75,21 +89,28 @@ class ApplicationController extends AbstractController
      */
     public function show(Applications $application = null, Request $request): Response
     {
-        // Check if $applications exists 
-        if (!$application) {
+        // Check if $application exists 
+        if (null === $application) {
             throw $this->createNotFoundException("This application does not exist.");
         }
 
         /** @var User $user */
         $user = $this->getUser();
-        if (!$user->isVerified() && !$user) {
-            throw $this->createAccessDeniedException("Your account is not verified. Please verify your account before continuing.");
-        }
+        // Check if the user can access
+        $this->isLogged($user);
+        $this->isVerified($user);
+        $this->isAllowedToAccessApplication($user, $application);
 
         $form = $this->createForm(ApplicationsFormType::class, $application);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Gestion Token
+            $token = new CsrfToken('application', $request->get('_csrf_token'));
+            if (!$this->csrfTokenManager->isTokenValid($token)) {
+                throw new InvalidCsrfTokenException();
+            }
+
             $this->em->flush();
             $this->addFlash('success', "Les données ont été mises à jour.");
 
@@ -127,6 +148,35 @@ class ApplicationController extends AbstractController
         $this->addFlash("info", "Cette candidature a bien été effacée");
 
         return $this->redirectToRoute("app_application");
+    }
+
+
+    /**
+     * Check if User is logged in
+     */
+    private function isLogged($user)
+    {
+        if (!$user) {
+            throw $this->createAccessDeniedException("You have to be logged in to access this page");
+        }
+    }
+    /**
+     * Check if User is verified
+     */
+    private function isVerified($user)
+    {
+        if (!$user->isVerified()) {
+            throw $this->createAccessDeniedException("You have to verify your email address to access this page");
+        }
+    }
+    /**
+     * Check if User is allowed to access the requested application
+     */
+    private function isAllowedToAccessApplication(User $user, Applications $application)
+    {
+        if ($application->getUser() !== $user) {
+            throw $this->createAccessDeniedException("You are not allowed to access this application.");
+        }
     }
 
 }
