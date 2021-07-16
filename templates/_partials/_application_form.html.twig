@@ -36,6 +36,8 @@
         </div>
     </div>
 
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('application') }}">
+
     <div class="mt-3 d-flex justify-content-end">
         <button class="btn btn-info px-5" type="submit">Go</button>
     </div>
