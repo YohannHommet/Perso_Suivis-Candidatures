@@ -14,9 +14,7 @@ main {
     position: relative;
 }
 
-
-/* FLASH MESSAGE */
-
+/*********************************************************************? FLASH MESSAGE */
 
 #flash {
     position: absolute;
@@ -30,15 +28,18 @@ main {
 
     z-index: 100;
 }
+
 .alert {
     position: relative;
     padding: 0.75rem 2rem;
     margin-bottom: 1rem;
     border-radius: 0 !important;
 }
+
 .alert-dismissible {
     padding-right: 4.5rem !important;
 }
+
 .alert-dismissible .btn-close {
     padding: 1rem 1rem;
 }
@@ -59,11 +60,7 @@ main {
     z-index: 100;
 }
 
-
-
-/* GLASS EFFECT */
-
-
+/*********************************************************************? GLASS EFFECT */
 
 .custom_button_glass {
     background: rgba(255, 255, 255, 0.10) !important;
@@ -84,11 +81,7 @@ main {
     color: crimson;
 }
 
-
-
-/* NAVBAR */
-
-
+/*********************************************************************? NAVBAR */
 
 .nav-text-dark {
     color: #e6e6e6;
@@ -106,17 +99,13 @@ main {
     box-shadow: 0 5px 20px 2px rgba(255, 255, 255, 0.25) !important;
 }
 
-
-
-/* BACKGROUND DE FOND DE PAGE */
-
-
+/*********************************************************************? BACKGROUND DE FOND DE PAGE */
 
 .bg {
-    background-image: radial-gradient(circle at 29% 55%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 4%, transparent 4%, transparent 44%, transparent 44%, transparent 100%), radial-gradient(circle at 85% 89%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 51%, transparent 51%, transparent 52%, transparent 52%, transparent 100%), radial-gradient(circle at 6% 90%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 53%, transparent 53%, transparent 64%, transparent 64%, transparent 100%), radial-gradient(circle at 35% 75%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 6%, transparent 6%, transparent 98%, transparent 98%, transparent 100%), radial-gradient(circle at 56% 75%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 16%, transparent 16%, transparent 23%, transparent 23%, transparent 100%), radial-gradient(circle at 42% 0%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 3%, transparent 3%, transparent 26%, transparent 26%, transparent 100%), radial-gradient(circle at 29% 28%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 51%, transparent 51%, transparent 75%, transparent 75%, transparent 100%), radial-gradient(circle at 77% 21%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 35%, transparent 35%, transparent 55%, transparent 55%, transparent 100%), radial-gradient(circle at 65% 91%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 46%, transparent 46%, transparent 76%, transparent 76%, transparent 100%), linear-gradient(45deg, rgba(27, 159, 255, 0.75), rgb(182 0 197));;
+    background-image: radial-gradient(circle at 29% 55%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 4%, transparent 4%, transparent 44%, transparent 44%, transparent 100%), radial-gradient(circle at 85% 89%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 51%, transparent 51%, transparent 52%, transparent 52%, transparent 100%), radial-gradient(circle at 6% 90%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 53%, transparent 53%, transparent 64%, transparent 64%, transparent 100%), radial-gradient(circle at 35% 75%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 6%, transparent 6%, transparent 98%, transparent 98%, transparent 100%), radial-gradient(circle at 56% 75%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 16%, transparent 16%, transparent 23%, transparent 23%, transparent 100%), radial-gradient(circle at 42% 0%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 3%, transparent 3%, transparent 26%, transparent 26%, transparent 100%), radial-gradient(circle at 29% 28%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 51%, transparent 51%, transparent 75%, transparent 75%, transparent 100%), radial-gradient(circle at 77% 21%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 35%, transparent 35%, transparent 55%, transparent 55%, transparent 100%), radial-gradient(circle at 65% 91%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 46%, transparent 46%, transparent 76%, transparent 76%, transparent 100%), linear-gradient(45deg, rgba(27, 159, 255, 0.75), rgb(182 0 197));
+    ;
     background-position: center center;
     background-repeat: no-repeat;
-    -moz-background-size: cover;
 
     position: absolute;
     top: 0;
@@ -128,11 +117,7 @@ main {
     overflow: hidden;
 }
 
-
-
-/* PAGE D'ACCUEIL */
-
-
+/*********************************************************************? PAGE D'ACCUEIL */
 
 .presentation {
     position: absolute;
@@ -145,12 +130,9 @@ main {
     text-align: justify;
 }
 
+/*********************************************************************? PAGES APPLICATIONS */
 
-
-/* PAGES APPLICATIONS */
-
-
-/* LIST */
+/********************** LIST */
 .table_glass {
     background: rgba(255, 255, 255, 0.20);
     box-shadow: 0 8px 32px 0 rgba(255, 255, 255, 0.25);
@@ -164,15 +146,15 @@ main {
     background: rgba(255, 255, 255, 0.10);
 }
 
-table > tbody > tr {
+table>tbody>tr {
     transition: 0.3s;
 }
 
-table > tbody > tr:hover {
+table>tbody>tr:hover {
     background: rgba(255, 255, 255, 0.20);
 }
 
-/* SHOW */
+/********************** SHOW */
 .list_glass {
     box-shadow: 0 8px 32px 0 rgba(255, 255, 255, 0.25);
     backdrop-filter: blur(6px);
@@ -188,11 +170,7 @@ table > tbody > tr:hover {
     background: rgba(255, 255, 255, 0.20);
 }
 
-
-
-/* PAGE DE LOGIN */
-
-
+/*********************************************************************? PAGE DE LOGIN */
 
 .top-50 {
     transform: translateY(65%);
@@ -204,14 +182,14 @@ label {
 }
 
 form.form_glass input.form-control {
-    background: rgba(255,255,255,0.15) !important;
+    background: rgba(255, 255, 255, 0.15) !important;
     border: 1px solid rgba(253, 235, 235, 0.30);
     border-radius: 50px;
     padding: 0.4rem 1.5rem;
 }
 
 form.form_glass input.form-control:focus {
-    background: rgba(255,255,255,0.15) !important;
+    background: rgba(255, 255, 255, 0.15) !important;
 }
 
 .custom_glass {
@@ -233,8 +211,7 @@ form.form_glass input[type="checkbox"] {
     background: rgb(255 255 255 / 10%);
 }
 
-/* FOOTER */
-
+/*********************************************************************? FOOTER */
 
 .footer {
     position: absolute;

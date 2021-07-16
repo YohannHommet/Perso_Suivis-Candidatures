@@ -49,7 +49,6 @@ class User implements UserInterface
      */
     private $applications;
 
-
     public function __construct()
     {
         $this->applications = new ArrayCollection();
@@ -62,7 +61,6 @@ class User implements UserInterface
     {
         return $this->email;
     }
-
 
     public function getId(): int
     {

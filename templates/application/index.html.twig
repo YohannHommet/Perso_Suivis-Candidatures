@@ -41,13 +41,19 @@
                     <td>{{ application.technos }}</td>
                     <td class="d-none d-md-table-cell">{{ application.remarques | u.truncate(12, '..', false) }}</td>
                 </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="9" class="text-center py-5">Aucune donnée à afficher pour l'isntant</td>
+                    </tr>
             {% endfor %}
             </tbody>
         </table>
 
     </div>
 
-    {% include '_partials/_modal.html.twig' %}
+    {# Application Modal #}
+    {% include 'application/_partials/_form_modal.html.twig' %}
+
 
 {% endblock %}
 

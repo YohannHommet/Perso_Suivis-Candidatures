@@ -14,6 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 
 
@@ -80,8 +81,9 @@ class ApplicationController extends AbstractController
 
     /**
      * @Route("/application/{id}", name="app_application_show", methods={"GET|POST"}, requirements={"id": "\d+"})
-     *
-     * @param Applications $applications
+     * 
+     * @paramConverter("application", class=Applications::class, options={"id" = "id"})
+     * @param Applications $application
      * @param Request $request
      * 
      * @return Response
@@ -126,6 +128,7 @@ class ApplicationController extends AbstractController
     /**
      * @Route("/application/{id}/delete", name="app_application_delete", methods={"GET|POST"}, requirements={"id": "\d+"})
      * 
+     * @paramConverter("application", class=Applications::class, options={"id" = "id"})
      * @param Applications $applications
      * 
      * @return Response
@@ -138,13 +141,13 @@ class ApplicationController extends AbstractController
 
         /** @var User $user */
         $user = $this->getUser();
-        if (!$user->isVerified() && !$user) {
-            throw $this->createAccessDeniedException("Your account is not verified. Please verify your account before continuing.");
-        }
+        $this->isLogged($user);
+        $this->isVerified($user);
+        $this->isAllowedToAccessApplication($user, $application);
         
         $this->em->remove($application);
         $this->em->flush();
-        $this->addFlash("info", "Cette candidature a bien été effacée");
+        $this->addFlash("info", "Candidature effacée chef !");
 
         return $this->redirectToRoute("app_application");
     }

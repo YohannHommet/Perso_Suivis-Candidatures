@@ -72,7 +72,6 @@ class Applications
      */
     private $user;
 
-    
     public function getId(): ?int
     {
         return $this->id;
@@ -86,7 +85,6 @@ class Applications
     public function setNomEntreprise(string $nom_entreprise): self
     {
         $this->nom_entreprise = $nom_entreprise;
-
         return $this;
     }
 
@@ -98,7 +96,6 @@ class Applications
     public function setLocalisationEntreprise(string $localisation_entreprise): self
     {
         $this->localisation_entreprise = $localisation_entreprise;
-
         return $this;
     }
 
@@ -110,7 +107,7 @@ class Applications
     public function setPosteRecherche(string $poste_recherche): self
     {
         $this->poste_recherche = $poste_recherche;
-
+        
         return $this;
     }
 
@@ -198,5 +195,4 @@ class Applications
 
         return $this;
     }
-    
 }
