@@ -16,7 +16,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @author Yohann Hommet
- * Class ApplicationController
  * @package App\Controller
  * @IsGranted("ROLE_USER")
  */
@@ -53,8 +52,9 @@ class ApplicationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->em->persist($application);
             $this->em->flush();
-
+            
             $this->addFlash('success', "Candidature ajoutée chef !");
+            
             return $this->redirectToRoute("app_application");
         }
 
@@ -76,7 +76,7 @@ class ApplicationController extends AbstractController
     public function show(Applications $application = null, Request $request): Response
     {
         // Check if $applications exists 
-        if (!$application) {
+        if (null === $application) {
             throw $this->createNotFoundException("This application does not exist.");
         }
 
@@ -104,7 +104,7 @@ class ApplicationController extends AbstractController
 
 
     /**
-     * @Route("/application/{id}/delete", name="app_application_delete", methods={"GET|POST"}, requirements={"id": "\d+"}, )
+     * @Route("/application/{id}/delete", name="app_application_delete", methods={"GET|POST"}, requirements={"id": "\d+"})
      * 
      * @param Applications $applications
      * 

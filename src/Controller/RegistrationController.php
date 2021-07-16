@@ -20,6 +20,7 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
+
 class RegistrationController extends AbstractController
 {
     private EmailVerifier $emailVerifier;
@@ -30,7 +31,7 @@ class RegistrationController extends AbstractController
     }
 
     /**
-     * @Route("/register", name="app_register")
+     * @Route("/register", name="app_register", methods={"GET", "POST"})
      */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginAuthenticator $authenticator, MailerInterface $mailer, CsrfTokenManagerInterface $csrfTokenManager): Response
     {
@@ -60,6 +61,7 @@ class RegistrationController extends AbstractController
                     ->htmlTemplate('registration/confirmation_email.html.twig')
             );
 
+
             // do anything else you need here, like send an email
 
         //            $email = (new Email())
@@ -68,6 +70,8 @@ class RegistrationController extends AbstractController
         //                ->subject('Check new account')
         //                ->text("check account : " . $user->getUsername());
         //            $mailer->send($email);
+
+
             $this->addFlash("info", "Account created, please check your email for confirmation");
 
             return $guardHandler->authenticateUserAndHandleSuccess(
@@ -84,7 +88,7 @@ class RegistrationController extends AbstractController
     }
 
     /**
-     * @Route("/verify/email", name="app_verify_email")
+     * @Route("/verify/email", name="app_verify_email", methods={"GET"})
      */
     public function verifyUserEmail(Request $request): Response
     {
