@@ -155,6 +155,16 @@ table>tbody>tr:hover {
 }
 
 /********************** SHOW */
+.back {
+    color: rgba(255, 255, 255, 0.7) !important;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.back:hover {
+    color: rgba(255, 255, 255, 0.85) !important;
+}
+
 .list_glass {
     box-shadow: 0 8px 32px 0 rgba(255, 255, 255, 0.25);
     backdrop-filter: blur(6px);
@@ -172,8 +182,13 @@ table>tbody>tr:hover {
 
 /*********************************************************************? PAGE DE LOGIN */
 
-.top-50 {
-    transform: translateY(65%);
+.custom_row {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -55%);
+    width: 100%;
+    height: 100%;
 }
 
 label {
@@ -193,7 +208,7 @@ form.form_glass input.form-control:focus {
 }
 
 .custom_glass {
-    padding: 1.5rem;
+    padding: 2rem;
 
     background: rgba(255, 255, 255, 0.12);
     box-shadow: 0 8px 32px 0 rgba(255, 255, 255, 0.25);

@@ -1,45 +1,45 @@
 <div class="container-fluid">
     {{ form_start(form, {attr: {novalidate: true}}) }}
-    <div class="row">
+    <div class="row my-4">
         <div class="col">
-            {{ form_row(form.nom_entreprise) }}
+            {{ form_widget(form.nom_entreprise, {attr: {placeholder: "Nom de l'entreprise *"}}) }}
         </div>
         <div class="col">
-            {{ form_row(form.localisation_entreprise) }}
+            {{ form_widget(form.localisation_entreprise,{attr: {placeholder: "Localisation de l'entreprise *"}}) }}
         </div>
         <div class="col">
-            {{ form_row(form.poste_recherche) }}
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col">
-            {{ form_row(form.lien_candidature) }}
-        </div>
-        <div class="col">
-            {{ form_row(form.nature_candidature) }}
-        </div>
-        <div class="col">
-            {{ form_row(form.date_candidature) }}
+            {{ form_widget(form.poste_recherche,{attr: {placeholder: "Poste recherche *"}}) }}
         </div>
     </div>
 
-    <div class="row">
+    <div class="row mb-4">
         <div class="col">
-            {{ form_row(form.email_contact) }}
+            {{ form_widget(form.lien_candidature, {attr: {'placeholder': 'Lien vers la candidature'}}) }}
         </div>
         <div class="col">
-            {{ form_row(form.technos) }}
+            {{ form_widget(form.nature_candidature,{attr: {'placeholder': 'Nature de la candidature *'}}) }}
         </div>
         <div class="col">
-            {{ form_row(form.remarques) }}
+            {{ form_widget(form.date_candidature) }}
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col">
+            {{ form_widget(form.email_contact,{attr: {'placeholder': 'Email contact'}}) }}
+        </div>
+        <div class="col">
+            {{ form_widget(form.technos,{attr: {'placeholder': 'Technos *'}}) }}
+        </div>
+        <div class="col">
+            {{ form_widget(form.remarques,{attr: {'placeholder': 'Remarques'}}) }}
         </div>
     </div>
 
     <input type="hidden" name="_csrf_token" value="{{ csrf_token('application') }}">
 
-    <div class="mt-3 d-flex justify-content-end">
-        <button class="btn btn-info px-5" type="submit">Go</button>
+    <div class="d-flex justify-content-end">
+        <button class="btn btn-outline-info shadow px-5" type="submit">Go</button>
     </div>
 
     {{ form_end(form) }}

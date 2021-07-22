@@ -53,6 +53,8 @@ class ApplicationController extends AbstractController
         $this->isLogged($user);
         $this->isVerified($user);
 
+        $applications = $this->em->getRepository(Applications::class)->findBy(['user' => $user], ['date_candidature' => 'DESC']);
+
         $application = new Applications();
 
         $form = $this->createForm(ApplicationsFormType::class, $application);
@@ -76,7 +78,7 @@ class ApplicationController extends AbstractController
 
         return $this->render('application/index.html.twig', [
             'form' => $form->createView(),
-            'applications' => $this->em->getRepository(Applications::class)->findBy(['user' => $user]),
+            'applications' => $applications,
         ]);
     }
 
@@ -116,14 +118,6 @@ class ApplicationController extends AbstractController
 
             $this->em->flush();
             $this->addFlash('success', "Les données ont été mises à jour.");
-
-            
-            $email = (new Email())
-                ->from('checkmyapplicationso@gmail.com')
-                ->to('yohann.hommet@outlook.fr')
-                ->subject('Check new account')
-                ->text("check account : " . $user->getUsername());
-            $mailer->send($email);
 
             return $this->redirectToRoute("app_application_show", ['id' => $application->getId()]);
         }
@@ -190,5 +184,4 @@ class ApplicationController extends AbstractController
             throw $this->createAccessDeniedException("You are not allowed to access this application.");
         }
     }
-
 }
