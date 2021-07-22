@@ -55,7 +55,8 @@ Use this space to show useful examples of how a project can be used. Additional 
 <!-- CONTACT -->
 ## Contact
 
-Yohann Hommet - [@twitter](https://twitter.com/YoH_DevBack) - yohann.hommet@outlook.fr - [@linkedin](https://www.linkedin.com/in/yohann-hommet/)
+Yohann Hommet 
+yohann.hommet@outlook.fr - [@twitter](https://twitter.com/YoH_DevBack) - [@linkedin](https://www.linkedin.com/in/yohann-hommet/)
 
 Project Link: [https://github.com/YohannHommet/Perso_Suivis-Candidatures](https://github.com/YohannHommet/Perso_Suivis-Candidatures)
 
@@ -67,7 +68,9 @@ Project Link: [https://github.com/YohannHommet/Perso_Suivis-Candidatures](https:
 * This readme version is a simplified version of this [github repository](https://github.com/othneildrew/Best-README-Template) by Othneildrew
 
 
+## Licence
 
+* Under the MIT licence.
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
