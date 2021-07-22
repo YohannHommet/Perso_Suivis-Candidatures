@@ -110,10 +110,10 @@ main {
     position: absolute;
     top: 0;
     left: 0;
-    max-width: 100vw;
-    max-height: 100vh;
-    width: 100%;
-    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    width: 100vw;
+    height: 100vh;
     overflow: hidden;
 }
 
@@ -245,13 +245,14 @@ form.form_glass input[type="checkbox"] {
 .social__list:hover {
     border: 1px solid rgba(255, 255, 255, 0.65);
     box-shadow: 0 0 25px 0 rgba(231, 1, 255, 0.5);
+    border-radius: 10px;
 }
 
 .social__links {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -45%);
 }
 
 .social__links .fas,
@@ -264,4 +265,15 @@ form.form_glass input[type="checkbox"] {
 .social__links .fas:hover,
 .social__links .fab:hover {
     color: white;
+}
+
+.fa, .fab, .fad, .fal, .far, .fas {
+    line-height: 0;
+}
+
+.footer__disclaimer {
+    display: block;
+    text-align: center;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
 }

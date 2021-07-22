@@ -1,4 +1,4 @@
-<footer class="footer">
+<footer class="footer mt-5">
 
     <ul class="social">
         <li class="social__list">
@@ -17,5 +17,11 @@
             </a>
         </li>
     </ul>
+
+    <p class="footer__copyright text-center text-white mt-2 mb-0 fw-lighter">
+        Yohann HOMMET - {{ date('Y') | date('Y') }}
+    </p>
+    
+    <a href="{{ path('app_home_disclaimer') }}" class="footer__disclaimer mb-1">Disclaimer</a>
 
 </footer>
