@@ -23,46 +23,70 @@ class Applications
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Length(max=255)
+     * @Assert\Type("string")
      */
     private ?string $nom_entreprise;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Length(max=255)
+     * @Assert\Type("string")
      */
     private ?string $localisation_entreprise;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Length(max=255)
+     * @Assert\Type("string")
      */
     private ?string $poste_recherche;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Length(max=255)
+     * @Assert\Type("string")
      */
     private ?string $nature_candidature;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\NotBlank()
+     * @Assert\Type("DateTime")
      */
     private ?\DateTimeInterface $date_candidature;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Url()
+     * @Assert\Length(max=255)
      */
     private ?string $lien_candidature;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=255)
+     * @Assert\Email()
      */
     private ?string $email_contact;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Length(max=255)
+     * @Assert\Type("string")
      */
     private ?string $technos;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=1000)
+     * @Assert\Type("string")
      */
     private ?string $remarques;
 

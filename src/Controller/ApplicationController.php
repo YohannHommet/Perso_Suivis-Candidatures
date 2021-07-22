@@ -15,6 +15,8 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 
 
@@ -88,7 +90,7 @@ class ApplicationController extends AbstractController
      * 
      * @return Response
      */
-    public function show(Applications $application = null, Request $request): Response
+    public function show(Applications $application = null, Request $request, MailerInterface $mailer): Response
     {
         // Check if $applications exists 
         if (null === $application) {
@@ -114,6 +116,14 @@ class ApplicationController extends AbstractController
 
             $this->em->flush();
             $this->addFlash('success', "Les données ont été mises à jour.");
+
+            
+            $email = (new Email())
+                ->from('checkmyapplicationso@gmail.com')
+                ->to('yohann.hommet@outlook.fr')
+                ->subject('Check new account')
+                ->text("check account : " . $user->getUsername());
+            $mailer->send($email);
 
             return $this->redirectToRoute("app_application_show", ['id' => $application->getId()]);
         }

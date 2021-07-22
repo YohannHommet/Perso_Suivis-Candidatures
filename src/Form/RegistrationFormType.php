@@ -53,8 +53,8 @@ class RegistrationFormType extends AbstractType
                             'max' => 4096,
                         ]),
                         new Regex([
-                            'pattern' => "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{6,}$/",
-                            'message' => "Password must be at least 6 characters long and contain at least one uppercase letter, one lowercase letter, one number and one special character",
+                            'pattern' => '/^[a-zA-Z0-9.!#$%&\'*+\/=?^_`{|}~-]+$/',
+                            'message' => 'Your password should contain only letters, numbers and characters',
                         ]),
                     ],
                     'label' => 'Password *',
