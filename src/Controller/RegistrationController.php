@@ -62,16 +62,6 @@ class RegistrationController extends AbstractController
             );
 
 
-            // do anything else you need here, like send an email
-
-        //            $email = (new Email())
-        //                ->from('promo.trinipero@gmail.com')
-        //                ->to('promo.trinipero@gmail.com')
-        //                ->subject('Check new account')
-        //                ->text("check account : " . $user->getUsername());
-        //            $mailer->send($email);
-
-
             $this->addFlash("info", "Account created, please check your email for confirmation");
 
             return $guardHandler->authenticateUserAndHandleSuccess(
@@ -80,6 +70,15 @@ class RegistrationController extends AbstractController
                 $authenticator,
                 'main' // firewall name in security.yaml
             );
+        }
+
+        // Gestion des erreurs pour Turbo
+        if ($form->isSubmitted() && !$form->isValid()) {
+            $content = $this->renderView('registration/register.html.twig', [
+                'registrationForm' => $form->createView(),
+            ]);
+
+            return new Response($content, Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
         return $this->render('registration/register.html.twig', [

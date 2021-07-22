@@ -10,7 +10,6 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Validator\Constraints\Regex;
@@ -22,22 +21,15 @@ class RegistrationFormType extends AbstractType
         $builder
             ->add('email', EmailType::class, [
                 'label' => 'Email',
-                'constraints' => [
-                    new NotBlank(),
-                    new Length(['min' => 6]),
-                    new Regex(
-                        ['pattern' => "/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/"]
-                    ),
-                ]
             ])
-            ->add('agreeTerms', CheckboxType::class, [
-                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'You should agree to our terms.',
-                    ]),
-                ],
-            ])
+            // ->add('agreeTerms', CheckboxType::class, [
+            //     'mapped' => false,
+            //     'constraints' => [
+            //         new IsTrue([
+            //             'message' => 'You should agree to our terms.',
+            //         ]),
+            //     ],
+            // ])
             // Affiche un champ Password et un champ Confirm Password
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
@@ -53,8 +45,8 @@ class RegistrationFormType extends AbstractType
                             'max' => 4096,
                         ]),
                         new Regex([
-                            'pattern' => '/^[a-zA-Z0-9.!#$%&\'*+\/=?^_`{|}~-]+$/',
-                            'message' => 'Your password should contain only letters, numbers and characters',
+                            'pattern' => '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{6,}$/',
+                            'message' => 'Your password should contain at least one uppercase letter, one lowercase letter, one digit and one special character',
                         ]),
                     ],
                     'label' => 'Password *',

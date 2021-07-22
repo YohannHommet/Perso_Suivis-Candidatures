@@ -14,31 +14,31 @@
         <div class="col-sm-6 col-md-4 col-lg-3 m-auto">
 
             <div class="custom_glass">
-                <h1 class="h2 mt-4 mb-5 text-center font-weight-normal">Register</h1>
+                <h1 class="h2 mt-4 mb-4 text-center font-weight-normal">Register</h1>
 
-                {{ form_start(registrationForm, {"attr": {"class": "form_glass"}}) }}
+                {{ form_start(registrationForm, {"attr": {"class": "form_glass", "novalidate": "novalidate"}}) }}
 
                 <div class="mb-3">
                     {{ form_row(registrationForm.email) }}
                 </div>
 
                 <div class="mb-3">
-                    {{ form_row(registrationForm.plainPassword.first, {label: 'Password'}) }}
+                    {{ form_row(registrationForm.plainPassword.first) }}
                 </div>
 
                 <div class="mb-3">
-                    {{ form_row(registrationForm.plainPassword.second, {label: 'Repeat Pasword'}) }}
+                    {{ form_row(registrationForm.plainPassword.second) }}
                 </div>
 
-                <div class="mx-3">
+                {# <div class="mx-3">
                     {{ form_row(registrationForm.agreeTerms) }}
+                </div> #}
+
+                <div class="d-grid mt-5">
+                    <button type="submit" class="btn log_btn rounded shadow-sm px-4 border">Register Meeee !</button>
                 </div>
 
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('register') }}">
-
-                <div class="d-grid mt-4">
-                    <button type="submit" class="btn log_btn rounded shadow-sm px-4 border">Register Meeee !</button>
-                </div>
 
                 {{ form_end(registrationForm) }}
             </div>
