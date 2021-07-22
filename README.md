@@ -55,7 +55,7 @@ Use this space to show useful examples of how a project can be used. Additional 
 <!-- CONTACT -->
 ## Contact
 
-Yohann Hommet - [@twitter_handle](https://twitter.com/YoH-DevBack) - email yohann.hommet@outlook.fr
+Yohann Hommet - [@twitter](https://twitter.com/YoH_DevBack) - email yohann.hommet@outlook.fr
 
 Project Link: [https://github.com/YohannHommet/Perso_Suivis-Candidatures](https://github.com/YohannHommet/Perso_Suivis-Candidatures)
 
