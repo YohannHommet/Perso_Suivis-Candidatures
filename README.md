@@ -35,10 +35,10 @@ To get a local copy up and running follow these simple steps.
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-1- Go to https://check-my-applications.herokuapp.com/ 
-2- Create a new account
-3- Check your emails for the confirmation link
-4- You can now add personnal applications
+1- Go to https://check-my-applications.herokuapp.com/  
+2- Create a new account  
+3- Check your emails for the confirmation link  
+4- You can now add personnal applications  
 
 
 <!-- CONTACT -->
