@@ -16,7 +16,7 @@ Application développée pour un cadre personnel, puis adapté pour proposer une
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![Screen][product-screenshot]](https://example.com)
 
 Here you can describe the project, why you made it and **for who you made it**, but mostly don't forget to add a screenshot like the image above AND a link to the demo like this : https://NicolasBrondin.github.io/basic-readme-template/
 
@@ -31,25 +31,14 @@ Here you can describe the project, why you made it and **for who you made it**, 
 
 To get a local copy up and running follow these simple steps.
 
-### Installation
- 
-1. Clone the repo
-```sh
-git clone https://github.com/YohannHommet/Perso_Suivis-Candidatures
-```
-2. Open VS Code
-3. Composer install
-3. Set your database environment
-4. Launch migrations
-5. Start server
-6. Enjoy
-
 
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
+1- Go to https://check-my-applications.herokuapp.com/  
+2- Create a new account  
+3- Check your emails for the confirmation link  
+4- You can now add personnal applications  
 
 
 <!-- CONTACT -->
@@ -59,13 +48,6 @@ Yohann Hommet
 yohann.hommet@outlook.fr - [@twitter](https://twitter.com/YoH_DevBack) - [@linkedin](https://www.linkedin.com/in/yohann-hommet/)
 
 Project Link: [https://github.com/YohannHommet/Perso_Suivis-Candidatures](https://github.com/YohannHommet/Perso_Suivis-Candidatures)
-
-
-
-<!-- ACKNOWLEDGEMENTS -->
-## Acknowledgements
-
-* This readme version is a simplified version of this [github repository](https://github.com/othneildrew/Best-README-Template) by Othneildrew
 
 
 ## Licence
