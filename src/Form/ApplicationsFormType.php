@@ -4,13 +4,13 @@ namespace App\Form;
 
 use App\Entity\Applications;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+
 
 class ApplicationsFormType extends AbstractType
 {
@@ -34,7 +34,7 @@ class ApplicationsFormType extends AbstractType
                 'widget' => 'single_text',
             ])
             ->add('lien_candidature', UrlType::class, [
-                'label' => "Lien de l'annonce *"
+                'label' => "Lien de l\'annonce *"
             ])
             ->add('email_contact', EmailType::class, [
                 'label' => 'Email du contact',
@@ -54,6 +54,7 @@ class ApplicationsFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Applications::class,
+            'csrf_protection' => false,
         ]);
     }
 }

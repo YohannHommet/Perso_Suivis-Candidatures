@@ -8,8 +8,11 @@
                 </div>
                 <div class="modal-body my-3 text-end">
                     <button type="button" class="btn btn-outline-danger shadow" data-bs-dismiss="modal">Annuler</button>
-                    <a class="btn btn-outline-info shadow ms-2"
-                        href="{{ path('app_application_delete', {'id': application.id}) }}">Supprimer</a>
+
+                    <form action="{{ path('app_application_delete', {'id': application.id}) }}" method="POST">
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('delete' ~ application.id) }}"/>
+                        <button type="submit" class="btn btn-outline-info shadow ms-2">Delete item</button>
+                    </form>
                 </div>
             </div>
         </div>

@@ -23,7 +23,7 @@ Here you can describe the project, why you made it and **for who you made it**, 
 ### Built With
 
 * 💻 VS Code
-* 🖊️ Syymfony
+* 🖊️ Symfony
 * 🐙 Turbo
 
 <!-- GETTING STARTED -->

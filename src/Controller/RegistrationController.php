@@ -61,7 +61,6 @@ class RegistrationController extends AbstractController
                     ->htmlTemplate('registration/confirmation_email.html.twig')
             );
 
-
             $this->addFlash("info", "Account created, please check your email for confirmation");
 
             return $guardHandler->authenticateUserAndHandleSuccess(
@@ -72,7 +71,7 @@ class RegistrationController extends AbstractController
             );
         }
 
-        // Gestion des erreurs pour Turbo
+        // HANDLE ERRORS
         if ($form->isSubmitted() && !$form->isValid()) {
             $content = $this->renderView('registration/register.html.twig', [
                 'registrationForm' => $form->createView(),

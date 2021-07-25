@@ -6,74 +6,66 @@ use App\Entity\User;
 use App\Entity\Applications;
 use App\Form\ApplicationsFormType;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Repository\ApplicationsRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Email;
-use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 
 
 /**
- * @author Yohann Hommet
+ * @author Yohann Hommet yohann.hommet@outlook.fr
  * @package App\Controller
  * @IsGranted("ROLE_USER")
  */
 class ApplicationController extends AbstractController
 {
-
     private EntityManagerInterface $em;
-    private CsrfTokenManagerInterface $csrfTokenManager;
 
-    public function __construct(EntityManagerInterface $em, CsrfTokenManagerInterface $csrfTokenManager)
+    public function __construct(EntityManagerInterface $em)
     {
         $this->em = $em;
-        $this->csrfTokenManager = $csrfTokenManager;
     }
 
     /**
      * @Route("/applications", name="app_application", methods={"GET|POST"})
      *
      * @param Request $request
-     * @param ApplicationsRepository $repository
-     *
      * @return Response
      */
     public function index(Request $request): Response
     {
         /** @var User $user */
         $user = $this->getUser();
-        // Check if the user can access
+        // Check authorizations
         $this->isLogged($user);
         $this->isVerified($user);
 
         $applications = $this->em->getRepository(Applications::class)->findBy(['user' => $user], ['date_candidature' => 'DESC']);
 
         $application = new Applications();
-
         $form = $this->createForm(ApplicationsFormType::class, $application);
         $form->handleRequest($request);
-        
-        if ($form->isSubmitted() && $form->isValid()) {
-            // Gestion Token
-            $token = new CsrfToken('application', $request->get('_csrf_token'));
-            if (!$this->csrfTokenManager->isTokenValid($token)) {
-                throw new InvalidCsrfTokenException();
-            }
 
+        // HANDLE FORM
+        if ($form->isSubmitted() && $form->isValid() && $this->isCsrfTokenValid('application', $request->request->get('_csrf_token'))) {
             $application->setUser($user);
             $this->em->persist($application);
             $this->em->flush();
-            
+
             $this->addFlash('success', "Candidature ajoutée chef !");
-            
+
             return $this->redirectToRoute("app_application");
+        }
+
+        // HANDLE ERRORS
+        if ($form->isSubmitted() && !$form->isValid()) {
+            $content = $this->renderView('application/index.html.twig', [
+                'form' => $form->createView(),
+                'applications' => $applications,
+            ]);
+
+            return new Response($content, Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
         return $this->render('application/index.html.twig', [
@@ -85,14 +77,12 @@ class ApplicationController extends AbstractController
 
     /**
      * @Route("/application/{id}", name="app_application_show", methods={"GET|POST"}, requirements={"id": "\d+"})
-     * 
-     * @paramConverter("application", class=Applications::class, options={"id" = "id"})
-     * @param Applications $application
+     *
+     * @param Applications|null $application
      * @param Request $request
-     * 
      * @return Response
      */
-    public function show(Applications $application = null, Request $request, MailerInterface $mailer): Response
+    public function show(Applications $application = null, Request $request): Response
     {
         // Check if $applications exists 
         if (null === $application) {
@@ -101,7 +91,7 @@ class ApplicationController extends AbstractController
 
         /** @var User $user */
         $user = $this->getUser();
-        // Check if the user can access
+        // Check authorizations
         $this->isLogged($user);
         $this->isVerified($user);
         $this->isAllowedToAccessApplication($user, $application);
@@ -109,17 +99,22 @@ class ApplicationController extends AbstractController
         $form = $this->createForm(ApplicationsFormType::class, $application);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            // Gestion Token
-            $token = new CsrfToken('application', $request->get('_csrf_token'));
-            if (!$this->csrfTokenManager->isTokenValid($token)) {
-                throw new InvalidCsrfTokenException();
-            }
-
+        // HANDLE FORM
+        if ($form->isSubmitted() && $form->isValid() && $this->isCsrfTokenValid('application', $request->request->get('_csrf_token'))) {
             $this->em->flush();
             $this->addFlash('success', "Les données ont été mises à jour.");
 
             return $this->redirectToRoute("app_application_show", ['id' => $application->getId()]);
+        }
+
+        // HANDLE ERRORS
+        if ($form->isSubmitted() && !$form->isValid()) {
+            $content = $this->renderView('application/show.html.twig', [
+                'form' => $form->createView(),
+                'application' => $application,
+            ]);
+
+            return new Response($content, Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
         return $this->render('application/show.html.twig', [
@@ -130,14 +125,13 @@ class ApplicationController extends AbstractController
 
 
     /**
-     * @Route("/application/{id}/delete", name="app_application_delete", methods={"GET|POST"}, requirements={"id": "\d+"})
-     * 
-     * @paramConverter("application", class=Applications::class, options={"id" = "id"})
-     * @param Applications $applications
-     * 
+     * @Route("/application/{id}/delete", name="app_application_delete", methods={"POST"}, requirements={"id": "\d+"})
+     *
+     * @param Applications|null $application
+     * @param Request $request
      * @return Response
      */
-    public function delete(Applications $application = null): Response
+    public function delete(Applications $application = null, Request $request): Response
     {
         if (null === $application) {
             throw $this->createNotFoundException("This application does not exist.");
@@ -145,13 +139,17 @@ class ApplicationController extends AbstractController
 
         /** @var User $user */
         $user = $this->getUser();
+        // Check authorizations
         $this->isLogged($user);
         $this->isVerified($user);
         $this->isAllowedToAccessApplication($user, $application);
-        
-        $this->em->remove($application);
-        $this->em->flush();
-        $this->addFlash("info", "Candidature effacée chef !");
+
+        // HANDLE TOKEN VALIDATION
+        if ($this->isCsrfTokenValid('delete'. $application->getId(), $request->request->get('_csrf_token'))) {
+            $this->em->remove($application);
+            $this->em->flush();
+            $this->addFlash("info", "Candidature effacée chef !");
+        }
 
         return $this->redirectToRoute("app_application");
     }
@@ -160,7 +158,7 @@ class ApplicationController extends AbstractController
     /**
      * Check if User is logged in
      */
-    private function isLogged($user)
+    private function isLogged($user): void
     {
         if (!$user) {
             throw $this->createAccessDeniedException("You have to be logged in to access this page");
@@ -169,7 +167,7 @@ class ApplicationController extends AbstractController
     /**
      * Check if User is verified
      */
-    private function isVerified($user)
+    private function isVerified($user): void
     {
         if (!$user->isVerified()) {
             throw $this->createAccessDeniedException("You have to verify your email address to access this page");
@@ -178,7 +176,7 @@ class ApplicationController extends AbstractController
     /**
      * Check if User is allowed to access the requested application
      */
-    private function isAllowedToAccessApplication(User $user, Applications $application)
+    private function isAllowedToAccessApplication(User $user, Applications $application): void
     {
         if ($application->getUser() !== $user) {
             throw $this->createAccessDeniedException("You are not allowed to access this application.");
