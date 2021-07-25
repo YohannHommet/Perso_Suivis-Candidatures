@@ -49,12 +49,6 @@ jobs:
         max_long_functions_rate: '0.1'
         project_name: ''
         max_timeout_sec: '600'
-
-    - name: Run Playwright tests
-      uses: microsoft/playwright-github-action@v1.4.4
-      
-    #- name: Super-Linter
-     # uses: github/super-linter@v4.0.2
       
     - name: Lint Code Base
       uses: docker://ghcr.io/github/super-linter:slim-v4
@@ -63,7 +57,10 @@ jobs:
         DEFAULT_BRANCH: main
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
-    - name: Lint Action
-      uses: wearerequired/lint-action@v1.10.0
-
+    - name: First interaction
+      uses: actions/first-interaction@v1.1.0
+      with:
+        repo-token: {{ secrets.GITHUB_TOKEN }}
+        issue-message: "Merci pour votre retour"
+        pr-message: "Merci pour votre contribution"
 
