@@ -1,14 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}cMa | Register{% endblock %}
+{% block title %}Register | cMa{% endblock %}
 
 {% block body %}
-
 
     {% for flashError in app.flashes('verify_email_error') %}
         <div class="flash__error alert alert-danger flash nav_glass text-dark text-center fs-5" role="alert">{{ flashError }}</div>
     {% endfor %}
-
 
     <div class="row custom_row">
         <div class="col-sm-7 col-md-5 col-lg-4 m-auto">
@@ -49,6 +47,5 @@
 
         </div>
     </div>
-
 
 {% endblock %}
