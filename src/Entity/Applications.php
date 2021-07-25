@@ -2,16 +2,13 @@
 
 namespace App\Entity;
 
-use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ApplicationsRepository;
-use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ApplicationsRepository::class)
  * @ORM\Table(name="applications")
- * @ORM\HasLifecycleCallbacks
  */
 class Applications
 {
