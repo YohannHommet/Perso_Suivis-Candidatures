@@ -14,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
 /**
- * @author Yohann Hommet yohann.hommet@outlook.fr
+ * @author YohannHommet yohann.hommet@outlook.fr
  * @package App\Controller
  * @IsGranted("ROLE_USER")
  */
@@ -100,7 +100,7 @@ class ApplicationController extends AbstractController
         $form->handleRequest($request);
 
         // HANDLE FORM
-        if ($form->isSubmitted() && $form->isValid() && $this->isCsrfTokenValid('application', $request->request->get('_csrf_token'))) {
+        if ($form->isSubmitted() && $form->isValid() && $this->isCsrfTokenValid('application', $request->get('_csrf_token'))) {
             $this->em->flush();
             $this->addFlash('success', "Les données ont été mises à jour.");
 
@@ -109,9 +109,9 @@ class ApplicationController extends AbstractController
 
         // HANDLE ERRORS
         if ($form->isSubmitted() && !$form->isValid()) {
-            $content = $this->renderView('application/show.html.twig', [
-                'form' => $form->createView(),
+            $content = $this->render('application/show.html.twig', [
                 'application' => $application,
+                'form' => $form->createView()
             ]);
 
             return new Response($content, Response::HTTP_UNPROCESSABLE_ENTITY);

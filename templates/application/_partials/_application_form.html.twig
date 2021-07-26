@@ -1,39 +1,61 @@
 <div class="container-fluid">
-    {{ form_start(form, {attr: {novalidate: true}}) }}
+    {{ form_start(form) }}
     <div class="row my-4">
         <div class="col">
-            {{ form_widget(form.nom_entreprise, {attr: {placeholder: "Nom de l'entreprise *"}}) }}
+            {{ form_label(form.nom_entreprise) }}
+            {{ form_widget(form.nom_entreprise) }}
+            {{ form_errors(form.nom_entreprise) }}
         </div>
         <div class="col">
-            {{ form_widget(form.localisation_entreprise,{attr: {placeholder: "Localisation de l'entreprise *"}}) }}
+
+            {{ form_label(form.localisation_entreprise) }}
+            {{ form_widget(form.localisation_entreprise) }}
+            {{ form_errors(form.localisation_entreprise) }}
         </div>
         <div class="col">
-            {{ form_widget(form.poste_recherche,{attr: {placeholder: "Poste recherche *"}}) }}
+            {{ form_label(form.poste_recherche) }}
+            {{ form_widget(form.poste_recherche) }}
+            {{ form_errors(form.poste_recherche) }}
         </div>
     </div>
 
     <div class="row mb-4">
         <div class="col">
-            {{ form_widget(form.lien_candidature, {attr: {'placeholder': 'Lien vers la candidature *'}}) }}
+            {{ form_label(form.lien_candidature) }}
+            {{ form_widget(form.lien_candidature) }}
+            {{ form_errors(form.lien_candidature) }}
         </div>
         <div class="col">
-            {{ form_widget(form.nature_candidature,{attr: {'placeholder': 'Nature de la candidature *'}}) }}
+            {{ form_label(form.nature_candidature) }}
+            {{ form_widget(form.nature_candidature) }}
+            {{ form_errors(form.nature_candidature) }}
         </div>
         <div class="col">
+            {{ form_label(form.date_candidature) }}
             {{ form_widget(form.date_candidature) }}
+            {{ form_errors(form.date_candidature) }}
         </div>
     </div>
 
     <div class="row mb-4">
         <div class="col">
-            {{ form_widget(form.email_contact,{attr: {'placeholder': 'Email contact'}}) }}
+            {{ form_label(form.email_contact) }}
+            {{ form_widget(form.email_contact) }}
+            {{ form_errors(form.email_contact) }}
         </div>
         <div class="col">
-            {{ form_widget(form.technos,{attr: {'placeholder': 'Technos *'}}) }}
+            {{ form_label(form.technos) }}
+            {{ form_widget(form.technos) }}
+            {{ form_errors(form.technos) }}
         </div>
         <div class="col">
-            {{ form_widget(form.remarques,{attr: {'placeholder': 'Remarques'}}) }}
+            {{ form_label(form.remarques) }}
+            {{ form_widget(form.remarques) }}
+            {{ form_errors(form.remarques) }}
         </div>
+        <p>
+            <small><strong>* : Champs obligatoires</strong></small>
+        </p>
     </div>
 
     <input type="hidden" name="_csrf_token" value="{{ csrf_token('application') }}">
