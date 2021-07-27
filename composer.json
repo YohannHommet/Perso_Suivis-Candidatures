@@ -102,7 +102,7 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
-        ]
+        ],
         "test": [
             "@clearCache",
             "phpunit"
