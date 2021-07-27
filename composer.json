@@ -103,6 +103,11 @@
         "post-update-cmd": [
             "@auto-scripts"
         ]
+        "test": [
+            "@clearCache",
+            "phpunit"
+        ],
+        "clearCache": "rm -rf cache/*"
     },
     "conflict": {
         "symfony/symfony": "*"
