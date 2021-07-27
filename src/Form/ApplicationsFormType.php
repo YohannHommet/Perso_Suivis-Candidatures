@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Applications;
-use Doctrine\Common\Annotations\Annotation\Required;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
