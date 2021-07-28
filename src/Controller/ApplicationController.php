@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 
 /**
@@ -28,17 +29,17 @@ class ApplicationController extends AbstractController
 
     /**
      * @Route("/applications", name="app_application", methods={"GET|POST"})
-     *
+     * 
      * @param Request $request
      * @return Response
      */
-    public function index(Applications $application, Request $request): Response
+    public function index(Request $request): Response
     {
         // check authorizations
-        $this->denyAccessUnlessGranted("view", $application);
-
+        $this->denyAccessUnlessGranted('access', $this->getUser());
+        
         $applications = $this->em->getRepository(Applications::class)->findBy(['user' => $this->getUser()], ['date_candidature' => 'DESC']);
-
+        
         $application = new Applications();
         $form = $this->createForm(ApplicationsFormType::class, $application);
         $form->handleRequest($request);
@@ -73,20 +74,17 @@ class ApplicationController extends AbstractController
 
     /**
      * @Route("/application/{id}", name="app_application_show", methods={"GET|POST"}, requirements={"id": "\d+"})
+     * @paramConverter("application", class="App\Entity\Applications", options={"id" = "id"})
      *
-     * @param Applications|null $application
+     * @param Applications $application
      * @param Request $request
      * @return Response
      */
-    public function show(Applications $application = null, Request $request): Response
+    public function show(Applications $application, Request $request): Response
     {
-        // Check if $applications exists 
-        if (null === $application) {
-            throw $this->createNotFoundException("This application does not exist.");
-        }
-
         // check authorizations
-        $this->denyAccessUnlessGranted("edit", $application);
+        // $this->denyAccessUnlessGranted('edit', $application);
+        $this->denyAccessUnlessGranted("access", $this->getUser());
 
         $form = $this->createForm(ApplicationsFormType::class, $application);
         $form->handleRequest($request);
@@ -119,18 +117,15 @@ class ApplicationController extends AbstractController
     /**
      * @Route("/application/{id}/delete", name="app_application_delete", methods={"POST"}, requirements={"id": "\d+"})
      *
-     * @param Applications|null $application
+     * @param Applications $application
      * @param Request $request
      * @return Response
      */
-    public function delete(Applications $application = null, Request $request): Response
+    public function delete(Applications $application, Request $request): Response
     {
-        if (null === $application) {
-            throw $this->createNotFoundException("This application does not exist.");
-        }
-
         // check authorizations
         $this->denyAccessUnlessGranted("delete", $application);
+        $this->denyAccessUnlessGranted("access", $this->getUser());
 
         // HANDLE TOKEN VALIDATION
         if ($this->isCsrfTokenValid('delete'. $application->getId(), $request->request->get('_csrf_token'))) {

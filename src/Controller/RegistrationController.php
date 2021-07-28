@@ -42,6 +42,7 @@ class RegistrationController extends AbstractController
         
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setPassword($passwordEncoder->encodePassword($user, $form->get('plainPassword')->getData()));
+            $user->setRoles(['ROLE_USER']);
 
             $token = new CsrfToken('register', $request->get('_csrf_token'));
             if (!$csrfTokenManager->isTokenValid($token)) {
@@ -55,9 +56,9 @@ class RegistrationController extends AbstractController
             // generate a signed url and email it to the user
             $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
                 (new TemplatedEmail())
-                    ->from(new Address('checkmyapplications@gmail.com', 'CheckMyApplications'))
+                    ->from(new Address('checkmyapplications@gmail.com', 'CheckMyApplications Bot'))
                     ->to($user->getEmail())
-                    ->subject('Please Confirm your Email')
+                    ->subject('Please Confirm your Email address')
                     ->htmlTemplate('registration/confirmation_email.html.twig')
             );
 
@@ -71,7 +72,7 @@ class RegistrationController extends AbstractController
             );
         }
 
-        // HANDLE ERRORS
+        // HANDLE ERRORS FOR TURBO
         if ($form->isSubmitted() && !$form->isValid()) {
             $content = $this->renderView('registration/register.html.twig', [
                 'registrationForm' => $form->createView(),
@@ -85,6 +86,7 @@ class RegistrationController extends AbstractController
         ]);
     }
 
+    
     /**
      * @Route("/verify/email", name="app_verify_email", methods={"GET"})
      */

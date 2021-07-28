@@ -22,7 +22,7 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("/disclaimer", name="app_home_disclaimer", methods={"GET"})
+     * @Route("/disclaimer", name="app_disclaimer", methods={"GET"})
      * @return Response
      */
     public function disclaimer(): Response
