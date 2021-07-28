@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
 use App\Entity\Applications;
 use App\Form\ApplicationsFormType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -33,15 +32,12 @@ class ApplicationController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    public function index(Request $request): Response
+    public function index(Applications $application, Request $request): Response
     {
-        /** @var User $user */
-        $user = $this->getUser();
-        // Check authorizations
-        $this->isLogged($user);
-        $this->isVerified($user);
+        // check authorizations
+        $this->denyAccessUnlessGranted("view", $application);
 
-        $applications = $this->em->getRepository(Applications::class)->findBy(['user' => $user], ['date_candidature' => 'DESC']);
+        $applications = $this->em->getRepository(Applications::class)->findBy(['user' => $this->getUser()], ['date_candidature' => 'DESC']);
 
         $application = new Applications();
         $form = $this->createForm(ApplicationsFormType::class, $application);
@@ -49,16 +45,16 @@ class ApplicationController extends AbstractController
 
         // HANDLE FORM
         if ($form->isSubmitted() && $form->isValid() && $this->isCsrfTokenValid('application', $request->request->get('_csrf_token'))) {
-            $application->setUser($user);
+            $application->setUser($this->getUser());
+            
             $this->em->persist($application);
             $this->em->flush();
-
             $this->addFlash('success', "Candidature ajoutée chef !");
 
             return $this->redirectToRoute("app_application");
         }
 
-        // HANDLE ERRORS
+        // HANDLE ERRORS FOR TURBO
         if ($form->isSubmitted() && !$form->isValid()) {
             $content = $this->renderView('application/index.html.twig', [
                 'form' => $form->createView(),
@@ -89,12 +85,8 @@ class ApplicationController extends AbstractController
             throw $this->createNotFoundException("This application does not exist.");
         }
 
-        /** @var User $user */
-        $user = $this->getUser();
-        // Check authorizations
-        $this->isLogged($user);
-        $this->isVerified($user);
-        $this->isAllowedToAccessApplication($user, $application);
+        // check authorizations
+        $this->denyAccessUnlessGranted("edit", $application);
 
         $form = $this->createForm(ApplicationsFormType::class, $application);
         $form->handleRequest($request);
@@ -107,7 +99,7 @@ class ApplicationController extends AbstractController
             return $this->redirectToRoute("app_application_show", ['id' => $application->getId()]);
         }
 
-        // HANDLE ERRORS
+        // HANDLE ERRORS FOR TURBO
         if ($form->isSubmitted() && !$form->isValid()) {
             $content = $this->render('application/show.html.twig', [
                 'application' => $application,
@@ -137,12 +129,8 @@ class ApplicationController extends AbstractController
             throw $this->createNotFoundException("This application does not exist.");
         }
 
-        /** @var User $user */
-        $user = $this->getUser();
-        // Check authorizations
-        $this->isLogged($user);
-        $this->isVerified($user);
-        $this->isAllowedToAccessApplication($user, $application);
+        // check authorizations
+        $this->denyAccessUnlessGranted("delete", $application);
 
         // HANDLE TOKEN VALIDATION
         if ($this->isCsrfTokenValid('delete'. $application->getId(), $request->request->get('_csrf_token'))) {
@@ -152,34 +140,5 @@ class ApplicationController extends AbstractController
         }
 
         return $this->redirectToRoute("app_application");
-    }
-
-
-    /**
-     * Check if User is logged in
-     */
-    private function isLogged($user): void
-    {
-        if (!$user) {
-            throw $this->createAccessDeniedException("You have to be logged in to access this page");
-        }
-    }
-    /**
-     * Check if User is verified
-     */
-    private function isVerified($user): void
-    {
-        if (!$user->isVerified()) {
-            throw $this->createAccessDeniedException("You have to verify your email address to access this page");
-        }
-    }
-    /**
-     * Check if User is allowed to access the requested application
-     */
-    private function isAllowedToAccessApplication(User $user, Applications $application): void
-    {
-        if ($application->getUser() !== $user) {
-            throw $this->createAccessDeniedException("You are not allowed to access this application.");
-        }
     }
 }

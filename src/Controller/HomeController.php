@@ -6,9 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 /**
  * @author YohannHommet <yohann.hommet@outlook.fr>
- * 
  */
 class HomeController extends AbstractController
 {
