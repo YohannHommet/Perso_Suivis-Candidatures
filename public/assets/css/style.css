@@ -113,7 +113,7 @@ main {
     max-width: 100%;
     max-height: 100%;
     width: 100vw;
-    height: 100vh;
+    height: calc(100vh + 150px);
     overflow: hidden;
 }
 
@@ -232,6 +232,7 @@ form.form_glass input[type="checkbox"] {
     position: absolute;
     bottom: 0;
     left: 0;
+    transform: translateX(-150px);
     width: 100%;
 }
 
