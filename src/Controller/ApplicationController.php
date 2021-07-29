@@ -39,7 +39,7 @@ class ApplicationController extends AbstractController
         /** @var User $user */
         $user = $this->getUser();
         // check authorizations
-        // $this->denyAccessUnlessGranted('access', $user);
+        $this->denyAccessUnlessGranted('access', $user);
         
         $applications = $this->em->getRepository(Applications::class)->findBy(['user' => $user], ['date_candidature' => 'DESC']);
         
@@ -88,7 +88,7 @@ class ApplicationController extends AbstractController
         /** @var User $user */
         $user = $this->getUser();
         // check authorizations
-        // $this->denyAccessUnlessGranted("access", $user);
+        $this->denyAccessUnlessGranted("access", $user);
         $this->denyAccessUnlessGranted('edit', $application);
 
         $form = $this->createForm(ApplicationsFormType::class, $application);
@@ -131,7 +131,7 @@ class ApplicationController extends AbstractController
         /** @var User $user */
         $user = $this->getUser();
         // check authorizations
-        // $this->denyAccessUnlessGranted('access', $user);
+        $this->denyAccessUnlessGranted('access', $user);
         $this->denyAccessUnlessGranted("delete", $application);
 
         // HANDLE TOKEN VALIDATION
