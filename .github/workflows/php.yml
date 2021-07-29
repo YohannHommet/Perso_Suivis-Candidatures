@@ -59,10 +59,4 @@ jobs:
         DEFAULT_BRANCH: main
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
-    - name: First interaction
-      uses: actions/first-interaction@v1.1.0
-      with:
-        repo-token: "CONTRIBUTOR_SECRET"
-        issue-message: "Merci pour votre retour"
-        pr-message: "Merci pour votre contribution"
 
