@@ -64,8 +64,8 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
-        - { path: ^/applications, roles: ["ROLE_USER"]}
-
-    access_decision_manager:
-        strategy: unanimous
-
+        - { path: ^/, roles: ["PUBLIC-ACCESS"]}
+        - { path: ^/disclaimer, roles: ["PUBLIC-ACCESS"]}
+        - { path: ^/login, roles: ["PUBLIC-ACCESS"]}
+        - { path: ^/applications, roles: ["IS_FULLY_AUTHENTICATED", "ROLE_USER"]}
+        - { path: ^/applications/\d+$, roles: ["IS_FULLY_AUTHENTICATED", "ROLE_USER"]}

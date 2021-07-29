@@ -15,13 +15,6 @@ class ApplicationsVoter extends Voter
     const EDIT = 'edit';
     const DELETE = 'delete';
 
-    private Security $security;
-
-    public function __construct(Security $security)
-    {
-        $this->security = $security;
-    }
-
     protected function supports(string $attribute, $subject): bool
     {
         return in_array($attribute, [self::EDIT, self::DELETE])

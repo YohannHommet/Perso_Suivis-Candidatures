@@ -39,7 +39,7 @@ class UserVoter extends Voter
         
         switch ($attribute) {
             case "access":
-                return $userSubject->isVerified() === true;
+                return $this->security->isGranted('IS_AUTHENTICATED_FULLY');
                 break;
         }
             
