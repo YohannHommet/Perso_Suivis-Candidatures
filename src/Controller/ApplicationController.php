@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Applications;
+use App\Entity\User;
 use App\Form\ApplicationsFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -35,10 +36,12 @@ class ApplicationController extends AbstractController
      */
     public function index(Request $request): Response
     {
+        /** @var User $user */
+        $user = $this->getUser();
         // check authorizations
-        $this->denyAccessUnlessGranted('access', $this->getUser());
+        $this->denyAccessUnlessGranted('access', $user);
         
-        $applications = $this->em->getRepository(Applications::class)->findBy(['user' => $this->getUser()], ['date_candidature' => 'DESC']);
+        $applications = $this->em->getRepository(Applications::class)->findBy(['user' => $user], ['date_candidature' => 'DESC']);
         
         $application = new Applications();
         $form = $this->createForm(ApplicationsFormType::class, $application);
@@ -82,8 +85,10 @@ class ApplicationController extends AbstractController
      */
     public function show(Applications $application, Request $request): Response
     {
+        /** @var User $user */
+        $user = $this->getUser();
         // check authorizations
-        $this->denyAccessUnlessGranted("access", $this->getUser());
+        $this->denyAccessUnlessGranted("access", $user);
         $this->denyAccessUnlessGranted('edit', $application);
 
         $form = $this->createForm(ApplicationsFormType::class, $application);
@@ -123,8 +128,10 @@ class ApplicationController extends AbstractController
      */
     public function delete(Applications $application, Request $request): Response
     {
+        /** @var User $user */
+        $user = $this->getUser();
         // check authorizations
-        $this->denyAccessUnlessGranted("access", $this->getUser());
+        $this->denyAccessUnlessGranted('access', $user);
         $this->denyAccessUnlessGranted("delete", $application);
 
         // HANDLE TOKEN VALIDATION

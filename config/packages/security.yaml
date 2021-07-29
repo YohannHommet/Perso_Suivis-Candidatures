@@ -62,10 +62,4 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
-        - { path: ^/, roles: ["PUBLIC_ACCESS"]}
-        - { path: ^/disclaimer, roles: ["PUBLIC_ACCESS"]}
-        - { path: ^/login, roles: ["PUBLIC_ACCESS"]}
-        - { path: ^/applications, roles: ["IS_FULLY_AUTHENTICATED", "ROLE_USER"]}
-        - { path: ^/applications/\d+$, roles: ["IS_FULLY_AUTHENTICATED", "ROLE_USER"]}
+        - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }

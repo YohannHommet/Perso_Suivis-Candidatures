@@ -350,6 +350,7 @@ form.form_glass input[type="checkbox"] {
 
 .custom__error_link {   
     color: rgb(235, 235, 235);
+    font-weight: 400;
 }
 
 .custom__error_link:hover {   
