@@ -83,8 +83,8 @@ class ApplicationController extends AbstractController
     public function show(Applications $application, Request $request): Response
     {
         // check authorizations
-        // $this->denyAccessUnlessGranted('edit', $application);
         $this->denyAccessUnlessGranted("access", $this->getUser());
+        $this->denyAccessUnlessGranted('edit', $application);
 
         $form = $this->createForm(ApplicationsFormType::class, $application);
         $form->handleRequest($request);
@@ -124,8 +124,8 @@ class ApplicationController extends AbstractController
     public function delete(Applications $application, Request $request): Response
     {
         // check authorizations
-        $this->denyAccessUnlessGranted("delete", $application);
         $this->denyAccessUnlessGranted("access", $this->getUser());
+        $this->denyAccessUnlessGranted("delete", $application);
 
         // HANDLE TOKEN VALIDATION
         if ($this->isCsrfTokenValid('delete'. $application->getId(), $request->request->get('_csrf_token'))) {
