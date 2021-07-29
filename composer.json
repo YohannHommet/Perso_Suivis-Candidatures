@@ -53,7 +53,8 @@
         "symfonycasts/verify-email-bundle": "^1.5",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/string-extra": "^3.3",
-        "twig/twig": "^2.12|^3.0"
+        "twig/twig": "^2.12|^3.0",
+        "symfony/web-profiler-bundle": "^5.2"
     },
     "require-dev": {
         "composer/package-versions-deprecated": "1.11.99.2",
@@ -65,7 +66,6 @@
         "symfony/phpunit-bridge": "^5.2",
         "symfony/stopwatch": "^5.2",
         "symfony/var-dumper": "^5.2",
-        "symfony/web-profiler-bundle": "^5.2"
     },
     "config": {
         "optimize-autoloader": true,
@@ -98,10 +98,8 @@
             "php bin/console doctrine:migrations:migrate --no-interaction"
         ],
         "post-install-cmd": [
-            "@auto-scripts"
         ],
         "post-update-cmd": [
-            "@auto-scripts"
         ],
         "test": [
             "@clearCache",
