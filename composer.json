@@ -100,8 +100,7 @@
             "php bin/console doctrine:migrations:migrate --no-interaction"
         ],
         "post-install-cmd": [
-            "@auto-scripts",
-            "@database-setup"
+            "@auto-scripts"
         ],
         "post-update-cmd": [
             "@auto-scripts"

@@ -31,7 +31,7 @@
     <div class="container-fluid p-0 m-0 g-0">
         {% include '_partials/_flash_message.html.twig' %}
 
-        <main role="main" class="bg">
+        <main role="main" class="{% if app.session.get('theme') == 'red' %}theme__red{% else %}theme__blue{% endif %}">
             {% block body %}
             {% endblock %}
         </main>
