@@ -395,42 +395,29 @@ form.form_glass input[type="checkbox"] {
     display: none;
 }
 
-.slider {
-    background-color: rgba(204, 204, 204, 0);
-    bottom: 0;
-    cursor: pointer;
-    left: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-    transition: .4s;
-    border: 1px solid rgba(253, 235, 235, 0.40);
+/*********************************************************************? DROPDOWN MENU */
+
+.dropdown-menu {
+    min-width: 100% !important;
+    border-radius: .25rem;
+    
+    background-color: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 32px 0 rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 1px solid rgba(253, 235, 235, 0.20);
 }
 
-.slider:before {
-    background-color: rgb(255, 255, 255);
-    bottom: 3px;
-    content: "";
-    height: 20px;
-    left: 3px;
-    position: absolute;
-    transition: .4s;
-    width: 20px;
-    box-shadow: inset -3px -3px 5px 0 rgba(0, 0, 0, 0.30);
+.dropdown-item {
+    color: rgba(255, 255, 255, 0.7) !important;
+    transition: all 0.3s;
 }
 
-input:checked+.slider {
-    background-color: #ff000078;
+.dropdown-item:hover {
+    color: rgba(255, 255, 255, 0.85) !important;
 }
 
-input:checked+.slider:before {
-    transform: translateX(23px);
-}
-
-.slider.round {
-    border-radius: 34px;
-}
-
-.slider.round:before {
-    border-radius: 50%;
+.dropdown-item:focus, .dropdown-item:hover {
+    color: rgba(255, 255, 255, 0.9) !important;
+    background-color: rgba(255, 255, 255, 0.10) !important;;
 }
