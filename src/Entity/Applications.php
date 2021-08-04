@@ -2,16 +2,21 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\Timestampable;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ApplicationsRepository;
 use Symfony\Component\Validator\Constraints as Assert;
 
+
 /**
  * @ORM\Entity(repositoryClass=ApplicationsRepository::class)
  * @ORM\Table(name="applications")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Applications
 {
+    use Timestampable;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
