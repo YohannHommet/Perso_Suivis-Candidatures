@@ -2,6 +2,7 @@
 
 namespace App\Entity\Traits;
 
+use DateTimeImmutable;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -59,13 +60,9 @@ trait Timestampable
     public function updateTimestamps()
     {
         if ($this->getCreatedAt() === null) {
-            $this->setCreatedAt(new \DateTimeImmutable());
+            $this->setCreatedAt(new DateTimeImmutable());
         }
 
-        $this->setUpdatedAt(new \DateTimeImmutable());
+        $this->setUpdatedAt(new DateTimeImmutable());
     }
-
-
-
-
 }
