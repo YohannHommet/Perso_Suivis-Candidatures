@@ -2,16 +2,21 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\Timestampable;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ApplicationsRepository;
 use Symfony\Component\Validator\Constraints as Assert;
 
+
 /**
  * @ORM\Entity(repositoryClass=ApplicationsRepository::class)
  * @ORM\Table(name="applications")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Applications
 {
+    use Timestampable;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -21,6 +26,7 @@ class Applications
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
      * @Assert\NotBlank()
      * @Assert\Length(max=255)
      * @Assert\Type("string")
@@ -29,6 +35,7 @@ class Applications
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
      * @Assert\NotBlank()
      * @Assert\Length(max=255)
      * @Assert\Type("string")
@@ -37,6 +44,7 @@ class Applications
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
      * @Assert\NotBlank()
      * @Assert\Length(max=255)
      * @Assert\Type("string")
@@ -45,6 +53,7 @@ class Applications
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
      * @Assert\NotBlank()
      * @Assert\Length(max=255)
      * @Assert\Type("string")
@@ -53,6 +62,7 @@ class Applications
 
     /**
      * @ORM\Column(type="datetime")
+     *
      * @Assert\NotBlank()
      * @Assert\Type("DateTime")
      */
@@ -60,6 +70,7 @@ class Applications
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
      * @Assert\NotBlank()
      * @Assert\Url()
      * @Assert\Length(max=255)
@@ -68,6 +79,7 @@ class Applications
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     *
      * @Assert\Length(max=255)
      * @Assert\Email()
      */
@@ -75,6 +87,7 @@ class Applications
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
      * @Assert\NotBlank()
      * @Assert\Length(max=255)
      * @Assert\Type("string")
@@ -83,6 +96,7 @@ class Applications
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     *
      * @Assert\Length(max=1000)
      * @Assert\Type("string")
      */
