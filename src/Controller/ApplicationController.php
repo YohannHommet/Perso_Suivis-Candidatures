@@ -49,7 +49,7 @@ class ApplicationController extends AbstractController
 
         // HANDLE FORM
         if ($form->isSubmitted() && $form->isValid() && $this->isCsrfTokenValid('application', $request->request->get('_csrf_token'))) {
-            $application->setUser($this->getUser());
+            $application->setUser($user);
             
             $this->em->persist($application);
             $this->em->flush();

@@ -48,7 +48,7 @@ class ApplicationsFormType extends AbstractType
                 ],
             ])
             ->add('lien_candidature', UrlType::class, [
-                'label' => "Lien de l\'annonce *",
+                'label' => "Lien de l'annonce *",
                 'attr' => [
                     'placeholder' => "Lien de l'annonce *",
                 ],

@@ -6,8 +6,10 @@ use App\Entity\User;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
+
 class UserTest extends TestCase
 {
+
     public function testGettersAndSetters(): void
     {
         $user = new User();
