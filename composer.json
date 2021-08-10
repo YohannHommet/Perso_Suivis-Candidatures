@@ -94,16 +94,20 @@
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
-        "database-setup" : [
+        "database-install" : [
             "php bin/console doctrine:database:drop --force",
             "php bin/console doctrine:database:create",
+        ],
+        "database-update" : [
             "php bin/console doctrine:migrations:migrate --no-interaction"
         ],
         "post-install-cmd": [
-            "@auto-scripts"
+            "@auto-scripts",
+            "@database-update"
         ],
         "post-update-cmd": [
-            "@auto-scripts"
+            "@auto-scripts",
+            "@database-update"
         ],
         "test": [
             "@clearCache",
