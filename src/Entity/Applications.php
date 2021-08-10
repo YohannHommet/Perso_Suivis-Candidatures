@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Entity\Traits\Timestampable;
+use App\Entity\Traits\Timestamps;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ApplicationsRepository;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Applications
 {
-    use Timestampable;
+    use Timestamps;
 
     /**
      * @ORM\Id

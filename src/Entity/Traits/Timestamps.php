@@ -7,19 +7,19 @@ use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 
-trait Timestampable
+trait Timestamps
 {
     /**
      * @var DateTimeInterface|null
      * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"})
      */
-    private ?DateTimeInterface $createdAt;
+    private ?DateTimeInterface $createdAt = null;
 
     /**
      * @var DateTimeInterface|null
      * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"})
      */
-    private ?DateTimeInterface $updatedAt;
+    private ?DateTimeInterface $updatedAt = null;
 
     /**
      * @return DateTimeInterface|null
@@ -57,7 +57,7 @@ trait Timestampable
      * @ORM\PrePersist()
      * @ORM\PreUpdate()
      */
-    public function updateTimestamps()
+    public function updateTimestamps(): void
     {
         if ($this->getCreatedAt() === null) {
             $this->setCreatedAt(new DateTimeImmutable());
