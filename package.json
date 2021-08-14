@@ -9,12 +9,17 @@
         "stimulus": "^2.0.0",
         "webpack-notifier": "^1.6.0"
     },
-    "license": "UNLICENSED",
+    "license": "MIT",
     "private": true,
     "scripts": {
         "dev-server": "encore dev-server",
         "dev": "encore dev",
         "watch": "encore dev --watch",
-        "build": "encore production --progress"
+        "build": "encore production --progress",
+        "heroku-postbuild": "encore production --progress"
+    },
+    "engines": {
+        "node": "12.18.1",
+        "npm": "7.11.x"
     }
 }

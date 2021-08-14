@@ -10,20 +10,3 @@ import './styles/app.css';
 
 // start the Stimulus application
 import './bootstrap';
-
-
-const navbar = document.querySelector('#nav');
-const pathname = window.location.pathname;
-const flashMessage = document.querySelector('#flash');
-
-// Navbar style toggle
-// if (pathname !== '/') {
-//     navbar.classList.replace('nav_transparent', 'nav_glass')
-// }
-
-// if flashMessage is active, hide it after 6 seconds
-if (flashMessage != null) {
-    setTimeout(() => {
-        flashMessage.style.display = 'none'
-    }, 6000)
-}
