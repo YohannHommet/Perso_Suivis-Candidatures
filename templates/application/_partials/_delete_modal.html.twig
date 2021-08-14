@@ -11,7 +11,7 @@
 
                     <form action="{{ path('app_application_delete', {'id': application.id}) }}" method="POST">
                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('delete' ~ application.id) }}"/>
-                        <button type="submit" class="btn btn-outline-info shadow ms-2">Delete item</button>
+                        <button type="submit" class="btn btn-outline-info shadow ms-2">Supprimer</button>
                     </form>
                 </div>
             </div>

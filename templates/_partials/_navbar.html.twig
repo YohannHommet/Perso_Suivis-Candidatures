@@ -1,13 +1,14 @@
-<nav class="navbar fixed-top navbar-expand-fluid navbar-dark bg-dark shadow nav_transparent" id="nav">
+<nav class="navbar fixed-top navbar-expand-fluid navbar-dark bg-dark shadow nav_glass" id="nav">
 
     <div class="container-fluid px-3 m-0 g-0">
         <a class="navbar-brand" href="{{ path('app_home') }}">Check My Applications</a>
 
         <div class="d-flex align-items-center">
 
-            {% if app.user %}
+            {% if is_granted('ROLE_USER') %}
             <div class="dropdown">
-                <a class="text-end me-3 d-block links text-decoration-underline" href="#" role="button" id="dropdownProfileMenu" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="text-end me-3 d-block links text-decoration-underline" href="#" role="button"
+                    id="dropdownProfileMenu" data-bs-toggle="dropdown" aria-expanded="false">
                     {{ app.user.username }} <i class="fas fa-caret-down"></i>
                 </a>
 
@@ -16,10 +17,10 @@
                 </ul>
             </div>
             {% endif %}
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">Menu
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">Menu
+                <span class="navbar-toggler-icon"></span>
+            </button>
         </div>
 
         <div class="collapse navbar-collapse mx-auto" id="navbarNav">
