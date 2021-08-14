@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+    {% block meta %}
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -10,6 +11,7 @@
     <meta name="description" content="Un site pour suivre vos candidatures facilement.">
     <meta name="author" content="Yohann Hommet">
     <meta name="copyright" content="{{ date('Y') | date('Y') }}">
+    {% endblock %}
 
     <title>{% block title %}Check My Applications{% endblock %}</title>
 
@@ -20,7 +22,7 @@
     {% endblock %}
 
         <script defer type="module">
-            import * from 'https://cdn.skypack.dev/@hotwired/turbo';
+            import * as Turbo from 'https://cdn.skypack.dev/@hotwired/turbo';
         </script>
     
     </head>

@@ -49,13 +49,13 @@ class ApplicationController extends AbstractController
 
         // HANDLE FORM
         if ($form->isSubmitted() && $form->isValid() && $this->isCsrfTokenValid('application', $request->request->get('_csrf_token'))) {
-            $application->setUser($this->getUser());
+            $application->setUser($user);
             
             $this->em->persist($application);
             $this->em->flush();
             $this->addFlash('success', "Candidature ajoutée chef !");
 
-            return $this->redirectToRoute("app_application");
+            return $this->redirectToRoute("app_application_show", ['id' => $application->getId()]);
         }
 
         // HANDLE ERRORS FOR TURBO

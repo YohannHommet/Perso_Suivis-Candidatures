@@ -52,11 +52,23 @@ jobs:
         project_name: ''
         max_timeout_sec: '600'
       
-    - name: Lint Code Base
-      uses: docker://ghcr.io/github/super-linter:slim-v4
-      env:
-        VALIDATE_ALL_CODEBASE: false
-        DEFAULT_BRANCH: main
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        
+#     - name: Lint Code Base
+#       uses: docker://ghcr.io/github/super-linter:slim-v4
+#       env:
+#         VALIDATE_ALL_CODEBASE: false
+#         DEFAULT_BRANCH: main
+#         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: The PHP Security Checker
+      # You may pin to the exact commit or the version.
+      # uses: symfonycorp/security-checker-action@038cecb1ee1bf871d1ef43e873f813d900a1125c
+      uses: symfonycorp/security-checker-action@v2
+      with:
+        # The path to composer.lock is stored (root directory by default)
+        lock: ./composer.lock
+
+    - uses: overtrue/phplint@8.0
+      with:
+        path: .
+        options: --exclude=*.log
 
