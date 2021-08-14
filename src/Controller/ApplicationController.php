@@ -55,7 +55,7 @@ class ApplicationController extends AbstractController
             $this->em->flush();
             $this->addFlash('success', "Candidature ajoutée chef !");
 
-            return $this->redirectToRoute("app_application");
+            return $this->redirectToRoute("app_application_show", ['id' => $application->getId()]);
         }
 
         // HANDLE ERRORS FOR TURBO
