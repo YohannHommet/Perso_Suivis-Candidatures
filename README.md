@@ -36,7 +36,7 @@ Application développée pour un cadre personnel, puis adapté pour proposer une
 
 1- Go to https://check-my-applications.herokuapp.com/  
 2- Create a new account  
-3- Check your emails for the confirmation link (!important)
+3- Check your emails for the confirmation link (!important)  
 4- You can now add personal applications
 
 
@@ -58,7 +58,7 @@ _This project is licensed under the terms of the MIT license._
 
 - Red theme (thx Johnathan)
 - Fix password regex to fit autogenerate passwords on mac (thx Romain)
-- Fix typo on email (thx Blondine)
+- Fix typo on email (thx Blandine)
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
