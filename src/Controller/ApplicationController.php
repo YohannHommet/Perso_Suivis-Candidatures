@@ -15,7 +15,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 
 /**
- * @author YohannHommet yohann.hommet@outlook.fr
+ * @author YohannHommet <yohann.hommet@outlook.fr>
+ * 
  * @package App\Controller
  * @IsGranted("ROLE_USER")
  */

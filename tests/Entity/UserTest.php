@@ -6,7 +6,12 @@ use App\Entity\User;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-
+/**
+ * @author YohannHommet <yohann.hommet@outlook.fr>
+ *
+ * Class UserTest
+ * @package App\Tests\Entity
+ */
 class UserTest extends TestCase
 {
 
