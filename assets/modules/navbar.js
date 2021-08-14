@@ -1,8 +1,8 @@
 const navbar =
     {
-        navbar: document.querySelector('#nav'),
-        pathname: window.location.pathname,
-        flashMessage: document.querySelector('#flash'),
+        navbar:         document.querySelector('#nav'),
+        pathname:       window.location.pathname,
+        flashMessage:   document.querySelector('#flash'),
 
         init: () =>
         {
@@ -11,9 +11,9 @@ const navbar =
 
         bindEvents: () =>
         {
-            if (navbar.pathname !== '/') {
-                navbar.navbar.classList.replace('nav_transparent', 'nav_glass')
-            }
+            // if (navbar.pathname == '/') {
+            //     navbar.navbar.classList.replace('nav_transparent', 'nav_glass')
+            // }
             // if flashMessage is active, hide it after 6 seconds
             if (navbar.flashMessage != null) {
                 setTimeout(() =>

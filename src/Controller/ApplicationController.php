@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Applications;
-use App\Entity\User;
 use App\Form\ApplicationsFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,7 +11,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-
 
 /**
  * @author YohannHommet <yohann.hommet@outlook.fr>
@@ -37,12 +35,10 @@ class ApplicationController extends AbstractController
      */
     public function index(Request $request): Response
     {
-        /** @var User $user */
-        $user = $this->getUser();
         // check authorizations
-        $this->denyAccessUnlessGranted('access', $user);
+        $this->denyAccessUnlessGranted('access', $this->getUser());
         
-        $applications = $this->em->getRepository(Applications::class)->findBy(['user' => $user], ['date_candidature' => 'DESC']);
+        $applications = $this->em->getRepository(Applications::class)->findBy(['user' => $this->getUser()], ['date_candidature' => 'DESC']);
         
         $application = new Applications();
         $form = $this->createForm(ApplicationsFormType::class, $application);
@@ -50,7 +46,7 @@ class ApplicationController extends AbstractController
 
         // HANDLE FORM
         if ($form->isSubmitted() && $form->isValid() && $this->isCsrfTokenValid('application', $request->request->get('_csrf_token'))) {
-            $application->setUser($user);
+            $application->setUser($this->getUser());
             
             $this->em->persist($application);
             $this->em->flush();
@@ -59,18 +55,8 @@ class ApplicationController extends AbstractController
             return $this->redirectToRoute("app_application_show", ['id' => $application->getId()]);
         }
 
-        // HANDLE ERRORS FOR TURBO
-        if ($form->isSubmitted() && !$form->isValid()) {
-            $content = $this->renderView('application/index.html.twig', [
-                'form' => $form->createView(),
-                'applications' => $applications,
-            ]);
-
-            return new Response($content, Response::HTTP_UNPROCESSABLE_ENTITY);
-        }
-
-        return $this->render('application/index.html.twig', [
-            'form' => $form->createView(),
+        return $this->renderForm('application/index.html.twig', [
+            'form' => $form,
             'applications' => $applications,
         ]);
     }
@@ -82,14 +68,13 @@ class ApplicationController extends AbstractController
      *
      * @param Applications $application
      * @param Request $request
+     * 
      * @return Response
      */
-    public function show(Applications $application, Request $request): Response
+    public function show(Applications $application, Request $request)
     {
-        /** @var User $user */
-        $user = $this->getUser();
         // check authorizations
-        $this->denyAccessUnlessGranted("access", $user);
+        $this->denyAccessUnlessGranted("access", $this->getUser());
         $this->denyAccessUnlessGranted('edit', $application);
 
         $form = $this->createForm(ApplicationsFormType::class, $application);
@@ -103,19 +88,9 @@ class ApplicationController extends AbstractController
             return $this->redirectToRoute("app_application_show", ['id' => $application->getId()]);
         }
 
-        // HANDLE ERRORS FOR TURBO
-        if ($form->isSubmitted() && !$form->isValid()) {
-            $content = $this->render('application/show.html.twig', [
-                'application' => $application,
-                'form' => $form->createView()
-            ]);
-
-            return new Response($content, Response::HTTP_UNPROCESSABLE_ENTITY);
-        }
-
-        return $this->render('application/show.html.twig', [
+        return $this->renderForm('application/show.html.twig', [
             'application' => $application,
-            'form' => $form->createView()
+            'form' => $form
         ]);
     }
 
@@ -129,10 +104,8 @@ class ApplicationController extends AbstractController
      */
     public function delete(Applications $application, Request $request): Response
     {
-        /** @var User $user */
-        $user = $this->getUser();
         // check authorizations
-        $this->denyAccessUnlessGranted('access', $user);
+        $this->denyAccessUnlessGranted('access', $this->getUser());
         $this->denyAccessUnlessGranted("delete", $application);
 
         // HANDLE TOKEN VALIDATION
