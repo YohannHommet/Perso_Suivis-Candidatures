@@ -4,12 +4,13 @@ namespace App\Form;
 
 use App\Entity\Applications;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\UrlType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
 
 class ApplicationsFormType extends AbstractType
 {
@@ -34,10 +35,12 @@ class ApplicationsFormType extends AbstractType
                     'placeholder' => 'Poste recherché *',
                 ],
             ])
-            ->add('nature_candidature', TextType::class, [
+            ->add('nature_candidature', ChoiceType::class, [
                 'label' => 'Nature Candidature *',
-                'attr' => [
-                    'placeholder' => 'Nature Candidature *',
+                'placeholder' => "-",
+                'choices' => [
+                    'Spontanée' => 'Spontanée',
+                    'Réponse à une offre' => "Réponse à une offre"
                 ],
             ])
             ->add('date_candidature', DateType::class, [

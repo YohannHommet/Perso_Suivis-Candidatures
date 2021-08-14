@@ -9,10 +9,17 @@
     font-family: 'Roboto', sans-serif;
 }
 
+html, body {
+    overflow-x: hidden;
+}
+
 main {
     position: relative;
 }
 
+li {
+    list-style: none;
+}
 
 /*********************************************************************? SCROLL BAR */
 
@@ -116,6 +123,14 @@ main {
     box-shadow: 0 5px 20px 2px rgba(255, 255, 255, 0.25) !important;
 }
 
+#burger {
+    transition: 0.3s;
+}
+
+#burger:hover {
+    color: rgba(255, 255, 255, 0.85);
+}
+
 /*********************************************************************? BACKGROUND DE FOND DE PAGE */
 
 .theme__red {
@@ -189,13 +204,13 @@ table>tbody>tr:hover {
 
 /********************** SHOW */
 .links {
-    color: rgba(255, 255, 255, 0.7) !important;
+    color: rgba(255, 255, 255, 0.75) !important;
     text-decoration: none;
     transition: all 0.3s;
 }
 
 .links:hover {
-    color: rgba(255, 255, 255, 0.85) !important;
+    color: rgba(255, 255, 255, 0.90) !important;
 }
 
 .list_glass {
@@ -261,7 +276,7 @@ form.form_glass input[type="checkbox"] {
 }
 
 .log_btn:hover {
-    background: rgb(255 255 255 / 10%);
+    background: rgba(255, 255, 255, 0.1);
 }
 
 /*********************************************************************? FOOTER */
@@ -298,7 +313,7 @@ form.form_glass input[type="checkbox"] {
 
 .social__list:hover {
     border: 1px solid rgba(255, 255, 255, 0.65);
-    box-shadow: 0 0 30px 2px rgb(1 255 255 / 85%);
+    box-shadow: 0 0 30px 2px rgba(1, 255, 255, 0.85);
     border-radius: 10px;
 }
 
@@ -368,13 +383,13 @@ form.form_glass input[type="checkbox"] {
     -webkit-text-fill-color: transparent;
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: rgba(253, 235, 235, 0.40);
-    text-shadow: -3px -3px 10px rgb(101 170 250 / 15%), 3px 3px 15px rgb(255 255 255 / 28%);
+    text-shadow: -3px -3px 10px rgba(101, 170, 250, 0.15), 3px 3px 15px rgba(255, 255, 255, 0.28);
 }
 
 .custom__error_text {
     color: rgb(60, 60, 60);
     letter-spacing: 6px;
-    text-shadow: 1px 1px 2px rgb(255 255 255 / 50%);
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.50);
 }
 
 .custom__error_link {

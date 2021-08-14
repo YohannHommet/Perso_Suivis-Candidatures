@@ -1,19 +1,22 @@
-    <!-- Delete Modal -->
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModal" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content bg-light">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Confirmez la suppression</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body my-3 text-end d-flex justify-content-end">
-                    <button type="button" class="btn btn-outline-danger shadow" data-bs-dismiss="modal">Annuler</button>
+<!-- Modal -->
+<div class="modal top fade" id="deleteModal" tabindex="-1" aria-labelledby="applicationModalLabel" aria-hidden="true"
+     data-mdb-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-light">
 
-                    <form action="{{ path('app_application_delete', {'id': application.id}) }}" method="POST">
-                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('delete' ~ application.id) }}"/>
-                        <button type="submit" class="btn btn-outline-info shadow ms-2">Supprimer</button>
-                    </form>
-                </div>
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Confirmez la suppression</h5>
+                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
             </div>
+            <div class="modal-body my-3 text-end d-flex justify-content-end">
+                <button type="button" class="btn btn-outline-danger shadow" data-bs-dismiss="modal">Annuler</button>
+
+                <form action="{{ path('app_application_delete', {'id': application.id}) }}" method="POST">
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('delete' ~ application.id) }}"/>
+                    <button type="submit" class="btn btn-outline-info shadow ms-2">Supprimer</button>
+                </form>
+            </div>
+
         </div>
     </div>
+</div>

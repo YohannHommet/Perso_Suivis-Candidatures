@@ -6,22 +6,30 @@
         <div class="d-flex align-items-center">
 
             {% if is_granted('ROLE_USER') %}
-            <div class="dropdown">
-                <a class="text-end me-3 d-block links text-decoration-underline" href="#" role="button"
-                    id="dropdownProfileMenu" data-bs-toggle="dropdown" aria-expanded="false">
-                    {{ app.user.username }} <i class="fas fa-caret-down"></i>
-                </a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle ext-end me-3 d-block links text-decoration-underline" href=""
+                       id="navbarDropdown" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                        {{ app.user.username }}
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownProfileMenu">
+                        <li>
+                            <a class="dropdown-item" href="{{ path('app_theme_switch') }}">Theme Switch</a>
+                        </li>
+                    </ul>
+                </li>
 
-                <ul class="dropdown-menu" aria-labelledby="dropdownProfileMenu">
-                    <li><a class="dropdown-item" href="{{ path('app_theme_switch')}}">Theme Switch</a></li>
-                </ul>
-            </div>
             {% endif %}
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">Menu
-                <span class="navbar-toggler-icon"></span>
+
+            <!-- Toggle button -->
+            <button id="burger" class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+                    data-mdb-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                MENU
+                <i class="fas fa-bars"></i>
             </button>
+
         </div>
+
 
         <div class="collapse navbar-collapse mx-auto" id="navbarNav">
             <ul class="navbar-nav">
@@ -29,15 +37,15 @@
                     <a class="nav-link fs-5" href="{{ path('app_application') }}">Applications</a>
                 </li>
                 {% if not is_granted('ROLE_USER') %}
-                <li class="nav-item text-center d-inline-flex justify-content-center">
-                    <a class="nav-link fs-5" href="{{ path('app_register') }}">Register</a><span
-                        class="fs-4 text-white px-2 pt-1">-</span><a class="nav-link fs-5"
-                        href="{{ path('app_login') }}">Login</a>
-                </li>
+                    <li class="nav-item text-center d-inline-flex justify-content-center">
+                        <a class="nav-link fs-5" href="{{ path('app_register') }}">Register</a>
+                        <span class="fs-4 text-white px-2 pt-1">-</span>
+                        <a class="nav-link fs-5" href="{{ path('app_login') }}">Login</a>
+                    </li>
                 {% else %}
-                <li class="nav-item text-center">
-                    <a class="nav-link fs-5" href="{{ path('app_logout') }}">Logout</a>
-                </li>
+                    <li class="nav-item text-center">
+                        <a class="nav-link fs-5" href="{{ path('app_logout') }}">Logout</a>
+                    </li>
                 {% endif %}
             </ul>
         </div>
