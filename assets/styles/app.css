@@ -1,3 +1,434 @@
-body {
-    background-color: lightgray;
+/*☻*/
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Yusei+Magic&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+main {
+    position: relative;
+}
+
+
+/*********************************************************************? SCROLL BAR */
+
+*::-webkit-scrollbar {
+    width: 0.7rem;
+}
+
+*::-webkit-scrollbar-track {
+    background: transparent;
+
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 167, 218, 0.85);
+    -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, .6);
+    border-radius: 1.5rem;
+}
+
+/*********************************************************************? FLASH MESSAGE */
+
+#flash {
+    position: absolute;
+    top: 10%;
+    right: 0;
+
+    background: rgba(255, 255, 255, 0.30) !important;
+    border: 1px solid rgba(253, 235, 235, 0.20);
+    color: black;
+    transition: 0.3s;
+
+    z-index: 100;
+}
+
+.alert {
+    position: relative;
+    padding: 0.75rem 2rem;
+    margin-bottom: 1rem;
+    border-radius: 0 !important;
+}
+
+.alert-dismissible {
+    padding-right: 4.5rem !important;
+}
+
+.alert-dismissible .btn-close {
+    padding: 1rem 1rem;
+}
+
+.flash__error {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    width: 100%;
+    max-width: 500px;
+    transform: translate(-50%, 0);
+
+    background: rgba(255, 255, 255, 0.30) !important;
+    border: 1px solid rgba(253, 235, 235, 0.20);
+    color: black;
+    transition: top 0.3s;
+
+    z-index: 100;
+}
+
+/*********************************************************************? GLASS EFFECT */
+
+.custom_button_glass {
+    background: rgba(255, 255, 255, 0.10) !important;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    border: 1px solid rgba(253, 235, 235, 0.20);
+    box-shadow: 0 0 15px 2px rgba(255, 255, 255, 0.15) !important;
+    color: white;
+    transition: 0.3s;
+}
+
+.custom_button_glass:hover {
+    background: rgba(255, 255, 255, 0.20) !important;
+    box-shadow: 0 0 12px 2px rgba(255, 255, 255, 0.10) !important;
+}
+
+.red:hover {
+    color: crimson;
+}
+
+/*********************************************************************? NAVBAR */
+
+.nav-text-dark {
+    color: #e6e6e6;
+}
+
+.nav_transparent {
+    background: transparent !important;
+}
+
+.nav_glass {
+    background: rgba(255, 255, 255, 0.20) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(253, 235, 235, 0.20);
+    box-shadow: 0 5px 20px 2px rgba(255, 255, 255, 0.25) !important;
+}
+
+/*********************************************************************? BACKGROUND DE FOND DE PAGE */
+
+.theme__red {
+    background-image: radial-gradient(circle at 29% 55%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 4%, transparent 4%, transparent 44%, transparent 44%, transparent 100%), radial-gradient(circle at 85% 89%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 51%, transparent 51%, transparent 52%, transparent 52%, transparent 100%), radial-gradient(circle at 6% 90%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 53%, transparent 53%, transparent 64%, transparent 64%, transparent 100%), radial-gradient(circle at 35% 75%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 6%, transparent 6%, transparent 98%, transparent 98%, transparent 100%), radial-gradient(circle at 56% 75%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 16%, transparent 16%, transparent 23%, transparent 23%, transparent 100%), radial-gradient(circle at 42% 0%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 3%, transparent 3%, transparent 26%, transparent 26%, transparent 100%), radial-gradient(circle at 29% 28%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 51%, transparent 51%, transparent 75%, transparent 75%, transparent 100%), radial-gradient(circle at 77% 21%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 35%, transparent 35%, transparent 55%, transparent 55%, transparent 100%), radial-gradient(circle at 65% 91%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 46%, transparent 46%, transparent 76%, transparent 76%, transparent 100%), linear-gradient(45deg, rgba(119, 0, 0, 0.876), rgba(255, 0, 0, 0.26));
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-height: calc(100vh + 150px);
+    max-width: 100%;
+    max-height: 100%;
+    width: 100vw;
+    height: 100vh;
+    overflow-y: hidden;
+}
+
+.theme__blue {
+    background-image: radial-gradient(circle at 29% 55%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 4%, transparent 4%, transparent 44%, transparent 44%, transparent 100%), radial-gradient(circle at 85% 89%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 51%, transparent 51%, transparent 52%, transparent 52%, transparent 100%), radial-gradient(circle at 6% 90%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 53%, transparent 53%, transparent 64%, transparent 64%, transparent 100%), radial-gradient(circle at 35% 75%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 6%, transparent 6%, transparent 98%, transparent 98%, transparent 100%), radial-gradient(circle at 56% 75%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 16%, transparent 16%, transparent 23%, transparent 23%, transparent 100%), radial-gradient(circle at 42% 0%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 3%, transparent 3%, transparent 26%, transparent 26%, transparent 100%), radial-gradient(circle at 29% 28%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 51%, transparent 51%, transparent 75%, transparent 75%, transparent 100%), radial-gradient(circle at 77% 21%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 35%, transparent 35%, transparent 55%, transparent 55%, transparent 100%), radial-gradient(circle at 65% 91%, hsla(329, 0%, 99%, 0.05) 0%, hsla(329, 0%, 99%, 0.05) 46%, transparent 46%, transparent 76%, transparent 76%, transparent 100%), linear-gradient(45deg, rgba(0, 98, 85, 0.849), rgba(0, 167, 218, 0.705));
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-height: calc(100vh + 150px);
+    max-width: 100%;
+    max-height: 100%;
+    width: 100vw;
+    height: 100vh;
+    overflow-y: hidden;
+}
+
+/*********************************************************************? PAGE D'ACCUEIL */
+
+.presentation {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+}
+
+.presentation p {
+    text-align: justify;
+}
+
+/*********************************************************************? PAGES APPLICATIONS */
+
+/********************** LIST */
+.table_glass {
+    background: rgba(255, 255, 255, 0.20);
+    box-shadow: 0 8px 32px 0 rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-radius: 5px;
+    border: 1px solid rgba(253, 235, 235, 0.20);
+}
+
+.table_glass thead {
+    background: rgba(255, 255, 255, 0.10);
+}
+
+table>tbody>tr {
+    transition: 0.3s;
+}
+
+table>tbody>tr:hover {
+    background: rgba(255, 255, 255, 0.20);
+}
+
+/********************** SHOW */
+.links {
+    color: rgba(255, 255, 255, 0.7) !important;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.links:hover {
+    color: rgba(255, 255, 255, 0.85) !important;
+}
+
+.list_glass {
+    box-shadow: 0 8px 32px 0 rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+}
+
+.list_glass-items {
+    background: rgba(255, 255, 255, 0.15);
+    transition: 0.3s;
+}
+
+.list_glass-items:hover {
+    background: rgba(255, 255, 255, 0.20);
+}
+
+/********************** FORM */
+#applicationModal > span.form-error-icon.badge.badge-danger.text-uppercase {
+    color: #212121;
+}
+
+/*********************************************************************? PAGE DE LOGIN */
+
+.custom_row {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -55%);
+    width: 100%;
+    height: 100%;
+}
+
+label {
+    margin-left: 1rem !important;
+    margin-bottom: 0.5rem !important;
+}
+
+form.form_glass input.form-control {
+    background: rgba(255, 255, 255, 0.15) !important;
+    border: 1px solid rgba(253, 235, 235, 0.30);
+    border-radius: 50px;
+    padding: 0.4rem 1.5rem;
+}
+
+form.form_glass input.form-control:focus {
+    background: rgba(255, 255, 255, 0.15) !important;
+}
+
+.custom_glass {
+    padding: 2rem;
+
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 8px 32px 0 rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-radius: 5px;
+    border: 1px solid rgba(253, 235, 235, 0.20);
+}
+
+form.form_glass input[type="checkbox"] {
+    border-radius: 50%;
+}
+
+.log_btn:hover {
+    background: rgb(255 255 255 / 10%);
+}
+
+/*********************************************************************? FOOTER */
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transform: translateY(150px);
+    width: 100%;
+}
+
+.social {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 0 !important;
+}
+
+.social__list {
+    position: relative;
+    width: 45px;
+    height: 45px;
+    margin: 0 3rem;
+
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    transform: rotate(45deg);
+
+    box-shadow: 0 0 32px 2px rgba(255, 255, 255, 0.30);
+    transition: 0.3s;
+}
+
+.social__list:hover {
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    box-shadow: 0 0 30px 2px rgb(1 255 255 / 85%);
+    border-radius: 10px;
+}
+
+.social__links {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -45%);
+}
+
+.social__links .fas,
+.social__links .fab {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.2rem;
+    transform: rotate(-45deg);
+}
+
+.social__links .fas:hover,
+.social__links .fab:hover {
+    color: white;
+}
+
+.fa,
+.fab,
+.fad,
+.fal,
+.far,
+.fas {
+    line-height: 0;
+}
+
+.footer__disclaimer {
+    display: block;
+    text-align: center;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/********************** DISCLAIMER */
+.disclaimer {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+
+/*********************************************************************? CUSTOM ERROR PAGES */
+
+.custom__error_box {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+
+    width: 100%;
+    height: 100%;
+    max-width: 500px;
+    max-height: 250px;
+
+}
+
+.custom__error_number {
+    position: absolute;
+    font-size: 10rem;
+    top: 0;
+    right: 0;
+    transform: translate(50px, -100px);
+
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: rgba(253, 235, 235, 0.40);
+    text-shadow: -3px -3px 10px rgb(101 170 250 / 15%), 3px 3px 15px rgb(255 255 255 / 28%);
+}
+
+.custom__error_text {
+    color: rgb(60, 60, 60);
+    letter-spacing: 6px;
+    text-shadow: 1px 1px 2px rgb(255 255 255 / 50%);
+}
+
+.custom__error_link {
+    color: rgb(235, 235, 235);
+    font-weight: 400;
+}
+
+.custom__error_link:hover {
+    color: rgb(255, 255, 255);
+}
+
+/*********************************************************************? CUSTOM THEME */
+
+.theme-switch-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateY(9px);
+}
+
+.theme-switch {
+    display: inline-block;
+    height: 28px;
+    position: relative;
+    width: 50px;
+}
+
+.theme-switch input {
+    display: none;
+}
+
+/*********************************************************************? DROPDOWN MENU */
+
+.dropdown-menu {
+    min-width: 100% !important;
+    border-radius: .25rem;
+    
+    background-color: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 32px 0 rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 1px solid rgba(253, 235, 235, 0.20);
+}
+
+.dropdown-item {
+    color: rgba(255, 255, 255, 0.7) !important;
+    transition: all 0.3s;
+}
+
+.dropdown-item:hover {
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.dropdown-item:focus, .dropdown-item:hover {
+    color: rgba(255, 255, 255, 0.95) !important;
+    background-color: rgba(255, 255, 255, 0.05) !important;;
 }

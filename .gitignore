@@ -1,5 +1,5 @@
-
 ###> symfony/framework-bundle ###
+/.commands.md
 /.env.local
 /.env.local.php
 /.env.*.local

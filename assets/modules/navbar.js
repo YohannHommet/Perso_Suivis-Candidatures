@@ -1,4 +1,4 @@
-const app =
+const navbar =
     {
         navbar: document.querySelector('#nav'),
         pathname: window.location.pathname,
@@ -6,22 +6,22 @@ const app =
 
         init: () =>
         {
-            app.bindEvents();
+            navbar.bindEvents();
         },
 
         bindEvents: () =>
         {
-            if (app.pathname !== '/') {
-                app.navbar.classList.replace('nav_transparent', 'nav_glass')
+            if (navbar.pathname !== '/') {
+                navbar.navbar.classList.replace('nav_transparent', 'nav_glass')
             }
             // if flashMessage is active, hide it after 6 seconds
-            if (app.flashMessage != null) {
+            if (navbar.flashMessage != null) {
                 setTimeout(() =>
                 {
-                    app.flashMessage.style.display = 'none'
+                    navbar.flashMessage.style.display = 'none'
                 }, 6000)
             }
         }
     }
 
-document.addEventListener('DOMContentLoaded', app.init);
+document.addEventListener('DOMContentLoaded', navbar.init);
